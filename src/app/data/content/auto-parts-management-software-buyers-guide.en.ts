@@ -1,0 +1,52 @@
+import type { ArticleBlock } from "@/src/app/types/article";
+
+const autoPartsManagementSoftwareEnglishBlocks: ArticleBlock[] = [
+  { type: "paragraph", text: "Choosing management software for an auto parts store, automotive workshop, or distribution business is no longer simply a matter of comparing subscription prices and feature counts. Fast access to parts data, inventory accuracy, supplier and customer management, and connected operations all affect business efficiency." },
+  { type: "paragraph", text: "Digital commerce is reshaping how parts are purchased and distributed. BCG's 2025 aftermarket study describes the growing role of e-commerce and digital platforms for workshops and consumers, while Auto Care highlights the value of real-time inventory and fitment data in the buying experience.", links: [{ label: "BCG's 2025 aftermarket study", href: "https://www.bcg.com/publications/2025/ecommerce-in-the-european-automotive-aftermarket" }, { label: "Auto Care", href: "https://www.autocare.org/data-and-information/market-research/joint-e-commerce-trends-and-outlook-forecast" }] },
+  { type: "paragraph", text: "The right question is not “What is the best auto parts management software?” It is “Which system fits the way my business operates today and can grow with me tomorrow?”", callout: true },
+  { type: "heading", text: "Quick takeaway" },
+  { type: "list", items: ["Product and part-number data management.", "Inventory, sales, invoicing, purchasing, and suppliers.", "Customers, business accounts, reports, and dashboards.", "Permissions, security, ease of use, and device access.", "Integrations, scalability, technical support, and total cost."] },
+  { type: "paragraph", text: "Most importantly, test the software using real processes from your business before making a purchase decision." },
+  { type: "heading", text: "Start with your business type" },
+  { type: "table", headers: ["Business", "Typical priorities"], rows: [["Auto parts store", "Products, part numbers, pricing, inventory, sales, suppliers, customers, and fast search."], ["Automotive workshop", "Vehicles, service workflow, parts used, jobs, invoices, and handover."], ["Auto parts distributor", "Inventory, suppliers, business customers, purchasing, orders, pricing, and product movement."]] },
+  { type: "paragraph", text: "These requirements are not identical. Start with your business model and workflow—not a list of software products." },
+  { type: "heading", text: "1. Product and parts data" },
+  { type: "list", items: ["Part name, Part Number, SKU, and barcode.", "Brand, category, supplier, purchase price, and selling price.", "Quantity and storage location.", "Vehicle fitment data where it is required."] },
+  { type: "paragraph", text: "Before buying, ask whether you can organize product data in the way your business actually requires, not simply whether the software has a product page." },
+  { type: "heading", text: "2. Product search and inventory accuracy" },
+  { type: "paragraph", text: "An employee needs to find a part quickly while a customer is waiting. Test searches by product name, Part Number, SKU, barcode, brand, and vehicle information where relevant." },
+  { type: "paragraph", text: "Inventory should show current quantity, available and low-stock items, sales, purchases, returns, adjustments, and product movement. Just as importantly, you should be able to see why the quantity changed." },
+  { type: "heading", text: "3. Purchasing, suppliers, sales, and invoicing" },
+  { type: "list", items: ["Supplier information, purchase transactions, receiving, and supply history.", "Supplier-linked products, purchase prices, lead times, and alternatives.", "A full sales workflow from product search to invoice completion.", "A clear inventory update after every sale, receipt, return, or adjustment."] },
+  { type: "paragraph", text: "Supply-chain resilience has become a strategic concern across the automotive sector, which reinforces the importance of supplier visibility and risk planning.", links: [{ label: "Supply-chain resilience", href: "https://fr.tradingview.com/news/reuters.com%2C2025%3Anewsml_L2N3S7086%3A0-europe-s-auto-parts-suppliers-suspend-output-due-to-china-s-rare-earth-curbs/" }] },
+  { type: "heading", text: "4. Customers, business accounts, and reports" },
+  { type: "paragraph", text: "As the business grows, customer data should go beyond a name and phone number. Depending on your needs, track contact details, previous purchases, orders, outstanding balances, notes, and business-relationship information." },
+  { type: "table", headers: ["KPI", "What it tells you"], rows: [["Sales", "Overall business activity."], ["Product sales", "Most requested products."], ["Inventory movement", "Fast- and slow-moving products."], ["Inventory value", "Capital tied up in inventory."], ["Low-stock products", "Items requiring attention."], ["Outstanding amounts", "Amounts requiring collection."]] },
+  { type: "heading", text: "5. Ease of use, permissions, and mobile access" },
+  { type: "list", items: ["Is the interface clear and are the steps logical?", "Can employees access information quickly under daily pressure?", "Are user permissions, backups, recovery, and activity logs available?", "Can managers review the information and perform needed tasks from mobile devices?"] },
+  { type: "paragraph", text: "The best system is not necessarily the most complex one. It is the one that fits the real workflow and can be used correctly by the team." },
+  { type: "heading", text: "6. Scalability, integrations, and support" },
+  { type: "paragraph", text: "Choose for tomorrow as well as today. Consider more products, users, locations, customers, and transactions. Review integrations with accounting, e-commerce, payment, and communication tools; ask what data moves, in which direction, and whether the integration is included in your plan." },
+  { type: "paragraph", text: "Ask about support channels, hours, response times, training, documentation, and escalation procedures. A useful question is: what happens if an issue stops an important business operation?" },
+  { type: "heading", text: "7. Calculate the real cost" },
+  { type: "paragraph", text: "Do not compare monthly subscription prices alone. Calculate subscription, setup, training, data migration, integrations, and additional fees—then compare the total cost with the value you receive." },
+  { type: "heading", text: "How to test management software before buying" },
+  { type: "list", ordered: true, items: ["Find a part using the method your team actually uses.", "Complete a full sale and check its inventory impact.", "Receive a shipment and verify the relevant data updates.", "Review a customer profile and understand their history.", "Request a report that reveals what needs management attention."] },
+  { type: "heading", text: "Mistakes to avoid" },
+  { type: "list", items: ["Choosing on price alone.", "Choosing the longest feature list.", "Ignoring employees and real workflows.", "Failing to test real data and migration.", "Ignoring growth and confusing accounting with operational management."] },
+  { type: "heading", text: "Data before AI" },
+  { type: "paragraph", text: "AI can support advanced business management, but it is not the starting point. A more reliable path is: organized data → digital processes → automation → analytics → advanced AI applications." },
+  { type: "paragraph", text: "This mirrors Google's guidance to prioritize helpful, reliable, people-first content and strong fundamentals over efforts aimed only at gaining visibility.", links: [{ label: "Google's guidance", href: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content" }] },
+  { type: "heading", text: "Where Partiva fits" },
+  { type: "paragraph", text: "Partiva is aimed at auto parts, automotive workshop, and distribution businesses. It helps organize daily operations, inventory, sales, and customer management. The right plan depends on the operations you need, your data volume, users, and growth requirements.", links: [{ label: "Partiva", href: "/" }] },
+  { type: "heading", text: "Conclusion" },
+  { type: "paragraph", text: "The best choice is not the cheapest system or the one with the most features. It is the system that fits your operations, organizes your data, is practical for your team, and supports sustainable growth. Test it using your own products, processes, and decisions before you commit." },
+  { type: "faq", items: [
+    { q: "What is the best auto parts management software?", a: "The best option is the one that matches your workflow and covers the products, inventory, sales, suppliers, customers, reporting, and growth needs of your business." },
+    { q: "Does an automotive workshop need different software from an auto parts store?", a: "A workshop may need additional capabilities for vehicles, services, jobs, and technicians, so it should be evaluated against workshop-specific workflows." },
+    { q: "What should I test before buying software?", a: "Test real scenarios: find a part, receive stock, complete a sale, update inventory, review a customer, apply permissions, and produce a management report." },
+    { q: "Is Partiva suitable for distributors?", a: "Partiva targets auto parts, workshop, and distribution businesses. Evaluate it against your product volume, transaction needs, users, and selected plan." }
+  ] }
+];
+
+export default autoPartsManagementSoftwareEnglishBlocks;

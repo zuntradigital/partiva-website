@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg-increase-repeat-purchase-auto-parts-customers-en" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(39 0.5 0.5)">
+      <stop offset="0%" stop-color="#0b1226"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <radialGradient id="glow-increase-repeat-purchase-auto-parts-customers-en" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#22d3ee" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-increase-repeat-purchase-auto-parts-customers-en)"/>
+  <circle cx="600" cy="380" r="330" fill="url(#glow-increase-repeat-purchase-auto-parts-customers-en)"/>
+  <circle cx="900.0" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="728.6" cy="133.3" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1071.4" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="900.0" cy="311.1" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="300.0" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="128.6" cy="488.9" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="471.4" cy="577.8" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="300.0" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="128.6" cy="755.6" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="642.9" cy="755.6" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <g transform="translate(600 400)">
+
+    <g transform="rotate(-12)">
+      <circle cx="0" cy="0" r="128" fill="none" stroke="#93c5fd" stroke-width="4" stroke-dasharray="10 12" opacity="0.75"/>
+      <path d="M 124 -30 l 26 20 l -30 14 z" fill="#67e8f9"/>
+      <path d="M -124 30 l -26 -20 l 30 -14 z" fill="#67e8f9"/>
+    </g>
+    <path d="M0 -54 L15.9 -16.7 56.6 -16.7 24.1 6.7 37 45.9 0 22.5 -37 45.9 -24.1 6.7 -56.6 -16.7 -15.9 -16.7 Z" fill="#e0f2fe" opacity="0.92"/>
+  
+  </g>
+</svg>

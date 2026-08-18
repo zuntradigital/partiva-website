@@ -1,0 +1,45 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg-auto-parts-sales-and-customer-management" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(46 0.5 0.5)">
+      <stop offset="0%" stop-color="#0b1226"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow-auto-parts-sales-and-customer-management" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#22d3ee" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-auto-parts-sales-and-customer-management)"/>
+  <circle cx="660" cy="430" r="330" fill="url(#glow-auto-parts-sales-and-customer-management)"/>
+  <circle cx="642.9" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1157.1" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="985.7" cy="133.3" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="814.3" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1157.1" cy="311.1" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="42.9" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="985.7" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="385.7" cy="488.9" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="214.3" cy="577.8" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="42.9" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="557.1" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="385.7" cy="755.6" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <g transform="translate(600 400)">
+
+    <line x1="0" y1="-6" x2="118" y2="-58" stroke="#93c5fd" stroke-width="3" opacity="0.7"/>
+    <line x1="0" y1="-6" x2="-104" y2="-86" stroke="#93c5fd" stroke-width="3" opacity="0.7"/>
+    <line x1="0" y1="-6" x2="-92" y2="98" stroke="#93c5fd" stroke-width="3" opacity="0.7"/>
+    <line x1="0" y1="-6" x2="100" y2="92" stroke="#93c5fd" stroke-width="3" opacity="0.7"/>
+    <circle cx="0" cy="-6" r="46" fill="#38bdf8" opacity="0.9"/>
+    <path d="M -16 -10 a16 16 0 1 1 32 0 a16 16 0 1 1 -32 0 M -22 20 q22 -20 44 0" stroke="#0b1226" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="118" cy="-58" r="24" fill="#e0f2fe" opacity="0.92"/>
+    <rect x="106" y="-70" width="24" height="24" rx="4" fill="none" stroke="#0b1226" stroke-width="3"/>
+    <circle cx="-104" cy="-86" r="22" fill="#e0f2fe" opacity="0.85"/>
+    <path d="M -115 -92 h22 M -115 -86 h22 M -115 -80 h14" stroke="#0b1226" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="-92" cy="98" r="22" fill="#e0f2fe" opacity="0.85"/>
+    <path d="M -102 90 h20 l-3 18 h-14 z" fill="none" stroke="#0b1226" stroke-width="3"/>
+    <circle cx="100" cy="92" r="20" fill="#e0f2fe" opacity="0.8"/>
+  
+  </g>
+</svg>
