@@ -1,0 +1,350 @@
+@import "tailwindcss";
+
+/* Motion Design tokens (SRS §42-44) -- named duration scale + the one house
+   easing curve already used everywhere (Motion `transition.ease` arrays and
+   the `partiva-*` keyframes below both hardcode this same cubic-bezier).
+   New motion work references these; existing hardcoded durations are left
+   as-is rather than refactored. */
+:root {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-fast: 150ms;
+  --motion-standard: 260ms;
+  --motion-section: 500ms;
+  --motion-hero: 800ms;
+}
+
+/* Class-based dark mode: `dark:` utilities apply whenever `.dark` is on
+   <html> (or an ancestor), driven by ThemeProvider instead of only
+   `prefers-color-scheme`. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Individual sections currently declare RTL; the selected locale remains the
+   source of truth and flips those legacy declarations when English is active. */
+html[data-locale="en"] [dir="rtl"] { direction: ltr !important; }
+html[data-locale="en"] .text-right { text-align: left; }
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+@keyframes partiva-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes partiva-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes partiva-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes partiva-pulse {
+  0%, 100% { opacity: .45; transform: scale(.96); }
+  50% { opacity: .8; transform: scale(1.04); }
+}
+
+.motion-reveal {
+  animation: partiva-fade-up 700ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.scroll-reveal {
+}
+
+.scroll-reveal:not(.is-visible) .motion-reveal,
+.scroll-reveal:not(.is-visible).motion-reveal {
+  animation-play-state: paused;
+}
+
+.scroll-reveal:not(.is-visible) .motion-enter {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.scroll-reveal.is-visible .motion-enter {
+  animation: partiva-fade-up 720ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.scroll-reveal:not(.is-visible) .motion-text {
+  opacity: 0;
+  transform: translateY(-22px);
+}
+
+.scroll-reveal.is-visible .motion-text {
+  animation: partiva-fade-down 680ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.scroll-reveal.is-visible .motion-delay-1 { animation-delay: 100ms; }
+.scroll-reveal.is-visible .motion-delay-2 { animation-delay: 200ms; }
+.scroll-reveal.is-visible .motion-delay-3 { animation-delay: 300ms; }
+.scroll-reveal.is-visible .motion-delay-4 { animation-delay: 400ms; }
+.scroll-reveal.is-visible .motion-delay-5 { animation-delay: 500ms; }
+.scroll-reveal.is-visible .motion-delay-6 { animation-delay: 600ms; }
+.scroll-reveal.is-visible .motion-delay-7 { animation-delay: 700ms; }
+.scroll-reveal.is-visible .motion-delay-8 { animation-delay: 800ms; }
+.scroll-reveal.is-visible .motion-delay-9 { animation-delay: 900ms; }
+
+/* Connector-line draw-in for the Workflow / How-It-Works step sequence
+   (SRS §16, §17): the line grows from 0 to full length once its
+   scroll-reveal ancestor is visible. `transform-origin` is set inline per
+   caller since it depends on RTL/LTR reading direction. */
+@keyframes partiva-line-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.scroll-reveal:not(.is-visible) .motion-line-x {
+  transform: scaleX(0);
+}
+
+.scroll-reveal.is-visible .motion-line-x {
+  animation: partiva-line-draw 550ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.motion-reveal > * {
+  animation: partiva-fade-up 650ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.motion-reveal > :nth-child(1) { animation-delay: 60ms; }
+.motion-reveal > :nth-child(2) { animation-delay: 140ms; }
+.motion-reveal > :nth-child(3) { animation-delay: 220ms; }
+.motion-reveal > :nth-child(4) { animation-delay: 300ms; }
+.motion-reveal > :nth-child(5) { animation-delay: 380ms; }
+.motion-reveal > :nth-child(6) { animation-delay: 460ms; }
+
+.motion-card {
+  transition: transform 300ms cubic-bezier(.22, 1, .36, 1), box-shadow 300ms ease, border-color var(--motion-standard) ease;
+}
+
+.motion-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Premium micro-interaction for primary CTA buttons (SRS §26-27): hover
+   elevation + background/shadow transition, a small press-down on click, no
+   bounce/flash. Additive utility -- doesn't replace each button's own
+   color/shape classes. */
+.btn-motion {
+  transition: transform var(--motion-fast) var(--motion-ease), box-shadow var(--motion-standard) ease, background-color var(--motion-standard) ease;
+}
+
+.btn-motion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -8px rgba(37, 99, 235, 0.35);
+}
+
+.btn-motion:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Animated nav-link underline + persistent active indicator (SRS §30).
+   Uses currentColor so it always matches the link's own text color
+   (already blue when active, gray otherwise) -- no new color tokens. */
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 10px;
+  inset-inline-end: 10px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: scaleX(0);
+  transition: transform var(--motion-standard) var(--motion-ease);
+}
+
+.nav-underline:hover::after,
+.nav-underline[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.motion-float {
+  animation: partiva-float 5s ease-in-out infinite;
+}
+
+.motion-glow {
+  animation: partiva-pulse 6s ease-in-out infinite;
+}
+
+/* Footer credit link -- a soft blue neon light sweeping across the text
+   itself (background-clip: text) combined with a synced text-shadow glow
+   pulse. Colors are the site's existing blue/gray scale via Tailwind v4's
+   generated --color-* custom properties, not new values. */
+@keyframes partiva-credit-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes partiva-credit-glow {
+  0%, 100% {
+    text-shadow: 0 0 2px rgba(96, 165, 250, 0.15), 0 0 6px rgba(59, 130, 246, 0.08);
+  }
+  50% {
+    text-shadow: 0 0 6px rgba(96, 165, 250, 0.55), 0 0 16px rgba(59, 130, 246, 0.4), 0 0 26px rgba(37, 99, 235, 0.22);
+  }
+}
+
+.credit-neon {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-gray-500) 0%,
+    var(--color-gray-400) 40%,
+    var(--color-blue-300) 50%,
+    var(--color-gray-400) 60%,
+    var(--color-gray-500) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: partiva-credit-sweep 7s linear infinite, partiva-credit-glow 7s ease-in-out infinite;
+}
+
+.credit-neon:hover {
+  animation-duration: 3s, 3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+.article-prose h1 {
+  margin-top: 2.5rem;
+  font-size: 1.875rem;
+  font-weight: 800;
+  line-height: 1.6;
+  color: #0f172a;
+}
+
+.dark .article-prose h1 {
+  color: #f8fafc;
+}
+
+.article-prose h2 {
+  margin-top: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.7;
+  color: #0f172a;
+}
+
+.dark .article-prose h2 {
+  color: #f8fafc;
+}
+
+.article-prose h3 {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-top: 1.75rem;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #1e3a8a;
+}
+
+.dark .article-prose h3 {
+  color: #93c5fd;
+}
+
+.article-prose h4,
+.article-prose h5,
+.article-prose h6 {
+  margin-top: 1.5rem;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.dark .article-prose h4,
+.dark .article-prose h5,
+.dark .article-prose h6 {
+  color: #93c5fd;
+}
+
+.article-prose h4 {
+  font-size: 1.05rem;
+}
+
+.article-prose h5 {
+  font-size: 1rem;
+}
+
+.article-prose h6 {
+  font-size: .95rem;
+}
+
+.article-prose img {
+  margin-top: 1.5rem;
+  border-radius: .75rem;
+  max-width: 100%;
+  height: auto;
+}
+
+.article-prose p,
+.article-prose li {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  line-height: 2;
+}
+
+.article-prose ul,
+.article-prose ol {
+  display: grid;
+  gap: .75rem;
+  margin-top: 1.25rem;
+}
+
+.article-prose table {
+  width: 100%;
+  font-size: .95rem;
+}
+
+.article-prose th,
+.article-prose td {
+  padding: .8rem 1rem;
+  text-align: right;
+}
+
+.article-prose th {
+  background: #eff6ff;
+}
+
+.dark .article-prose th {
+  background: #1e293b;
+  color: #93c5fd;
+}
+
+.dark .article-prose tr + tr td {
+  border-top-color: #1e293b;
+}
+
+.article-prose tr + tr td {
+  border-top: 1px solid #e2e8f0;
+}

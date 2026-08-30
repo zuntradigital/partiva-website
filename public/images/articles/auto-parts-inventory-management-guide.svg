@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg-auto-parts-inventory-management-guide" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(47 0.5 0.5)">
+      <stop offset="0%" stop-color="#0b1226"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <radialGradient id="glow-auto-parts-inventory-management-guide" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#22d3ee" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-auto-parts-inventory-management-guide)"/>
+  <circle cx="540" cy="380" r="330" fill="url(#glow-auto-parts-inventory-management-guide)"/>
+  <circle cx="128.6" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="642.9" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="471.4" cy="133.3" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="300.0" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="814.3" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="128.6" cy="311.1" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="642.9" cy="311.1" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="471.4" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="985.7" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="814.3" cy="488.9" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="642.9" cy="577.8" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1157.1" cy="577.8" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="985.7" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="814.3" cy="755.6" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <g transform="translate(600 400)">
+
+    <line x1="-180" y1="-84" x2="180" y2="-84" stroke="#67e8f9" stroke-width="4" stroke-linecap="round"/>
+    <line x1="-180" y1="16" x2="180" y2="16" stroke="#67e8f9" stroke-width="4" stroke-linecap="round"/>
+    <line x1="-180" y1="116" x2="180" y2="116" stroke="#67e8f9" stroke-width="4" stroke-linecap="round"/>
+    <rect x="-150" y="-70" width="56" height="56" rx="8" fill="#e0f2fe" fill-opacity="0.6699999999999999" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="-80" y="-70" width="56" height="56" rx="8" fill="none" fill-opacity="0" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="-10" y="-70" width="56" height="56" rx="8" fill="#e0f2fe" fill-opacity="0.61" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="60" y="-70" width="56" height="56" rx="8" fill="#e0f2fe" fill-opacity="0.73" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="130" y="-70" width="56" height="56" rx="8" fill="none" fill-opacity="0" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="-150" y="30" width="56" height="56" rx="8" fill="#e0f2fe" fill-opacity="0.6699999999999999" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="-80" y="30" width="56" height="56" rx="8" fill="none" fill-opacity="0" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="-10" y="30" width="56" height="56" rx="8" fill="#e0f2fe" fill-opacity="0.61" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="60" y="30" width="56" height="56" rx="8" fill="#e0f2fe" fill-opacity="0.73" stroke="#93c5fd" stroke-width="2.5"/>
+    <rect x="130" y="30" width="56" height="56" rx="8" fill="none" fill-opacity="0" stroke="#93c5fd" stroke-width="2.5"/>
+  
+  </g>
+</svg>

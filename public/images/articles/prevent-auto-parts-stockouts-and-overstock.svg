@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg-prevent-auto-parts-stockouts-and-overstock" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(50 0.5 0.5)">
+      <stop offset="0%" stop-color="#0b1226"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow-prevent-auto-parts-stockouts-and-overstock" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#22d3ee" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-prevent-auto-parts-stockouts-and-overstock)"/>
+  <circle cx="540" cy="430" r="330" fill="url(#glow-prevent-auto-parts-stockouts-and-overstock)"/>
+  <circle cx="42.9" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="985.7" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="214.3" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1157.1" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="42.9" cy="311.1" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="557.1" cy="311.1" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="385.7" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="214.3" cy="488.9" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="728.6" cy="488.9" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="42.9" cy="577.8" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="557.1" cy="577.8" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="385.7" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="900.0" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="728.6" cy="755.6" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <g transform="translate(600 400)">
+
+    <line x1="0" y1="-120" x2="0" y2="110" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+    <path d="M -70 110 h140 l-20 34 h-100 z" fill="#e0f2fe" opacity="0.35"/>
+    <g transform="rotate(7)">
+      <line x1="-150" y1="0" x2="150" y2="0" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+      <line x1="-150" y1="0" x2="-150" y2="56" stroke="#93c5fd" stroke-width="3" opacity="0.7"/>
+      <line x1="150" y1="0" x2="150" y2="56" stroke="#93c5fd" stroke-width="3" opacity="0.7"/>
+      <rect x="-168" y="56" width="36" height="30" rx="5" fill="none" stroke="#67e8f9" stroke-width="4"/>
+      <rect x="120" y="30" width="34" height="26" rx="4" fill="#67e8f9" opacity="0.9"/>
+      <rect x="124" y="56" width="34" height="26" rx="4" fill="#67e8f9" opacity="0.75"/>
+      <rect x="128" y="82" width="34" height="26" rx="4" fill="#67e8f9" opacity="0.6"/>
+    </g>
+    <circle cx="0" cy="-128" r="10" fill="#67e8f9"/>
+  
+  </g>
+</svg>

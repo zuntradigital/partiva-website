@@ -1,0 +1,35 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg-reduce-auto-parts-order-errors-and-returns" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(44 0.5 0.5)">
+      <stop offset="0%" stop-color="#0b1226"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow-reduce-auto-parts-order-errors-and-returns" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#22d3ee" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-reduce-auto-parts-order-errors-and-returns)"/>
+  <circle cx="540" cy="430" r="330" fill="url(#glow-reduce-auto-parts-order-errors-and-returns)"/>
+  <circle cx="214.3" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="728.6" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="557.1" cy="133.3" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1071.4" cy="133.3" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="900.0" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="728.6" cy="311.1" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1071.4" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="900.0" cy="488.9" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="300.0" cy="577.8" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="128.6" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="471.4" cy="755.6" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <g transform="translate(600 400)">
+
+    <path d="M 100 -70 A 140 140 0 0 1 40 140" fill="none" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 24 128 l 26 22 l -8 -32 z" fill="#93c5fd"/>
+    <path d="M0 -110 L96 -78 V10 C96 78 52 118 0 138 C-52 118 -96 78 -96 10 V-78 Z" fill="#0b1226" fill-opacity="0.55" stroke="#e0f2fe" stroke-width="5"/>
+    <path d="M -34 4 L -10 30 L 40 -30" fill="none" stroke="#67e8f9" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  </g>
+</svg>

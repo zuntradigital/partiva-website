@@ -1,0 +1,51 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg-choosing-auto-parts-workshop-management-software-en" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(42 0.5 0.5)">
+      <stop offset="0%" stop-color="#0b1226"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow-choosing-auto-parts-workshop-management-software-en" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#22d3ee" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-choosing-auto-parts-workshop-management-software-en)"/>
+  <circle cx="600" cy="430" r="330" fill="url(#glow-choosing-auto-parts-workshop-management-software-en)"/>
+  <circle cx="300.0" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="814.3" cy="44.4" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="128.6" cy="133.3" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="642.9" cy="133.3" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="471.4" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="985.7" cy="222.2" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="814.3" cy="311.1" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="642.9" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1157.1" cy="400.0" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="985.7" cy="488.9" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="814.3" cy="577.8" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="214.3" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="1157.1" cy="666.7" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <circle cx="42.9" cy="755.6" r="2.4" fill="#bae6fd" opacity="0.18"/>
+  <g transform="translate(600 400)">
+
+    <rect x="-130" y="-110" width="200" height="230" rx="18" fill="none" stroke="#93c5fd" stroke-width="4"/>
+    <rect x="-80" y="-124" width="100" height="24" rx="8" fill="#0b1226" stroke="#93c5fd" stroke-width="4"/>
+    
+    <circle cx="-96" cy="-58" r="10" fill="none" stroke="#67e8f9" stroke-width="3.5"/>
+    <path d="M -101 -58 l 4 5 l 8 -10" fill="none" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="-74" y="-65" width="100" height="14" rx="7" fill="#e0f2fe" opacity="0.85"/>
+    <circle cx="-96" cy="-18" r="10" fill="none" stroke="#67e8f9" stroke-width="3.5"/>
+    <path d="M -101 -18 l 4 5 l 8 -10" fill="none" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="-74" y="-25" width="90" height="14" rx="7" fill="#e0f2fe" opacity="0.7"/>
+    <circle cx="-96" cy="22" r="10" fill="none" stroke="#67e8f9" stroke-width="3.5"/>
+    <path d="M -101 22 l 4 5 l 8 -10" fill="none" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="-74" y="15" width="80" height="14" rx="7" fill="#e0f2fe" opacity="0.55"/>
+    <g transform="translate(112 96)">
+      <circle r="46" fill="none" stroke="#67e8f9" stroke-width="10"/>
+      <line x1="46.0" y1="0.0" x2="62.0" y2="0.0" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/><line x1="32.5" y1="32.5" x2="43.8" y2="43.8" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/><line x1="0.0" y1="46.0" x2="0.0" y2="62.0" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/><line x1="-32.5" y1="32.5" x2="-43.8" y2="43.8" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/><line x1="-46.0" y1="0.0" x2="-62.0" y2="0.0" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/><line x1="-32.5" y1="-32.5" x2="-43.8" y2="-43.8" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/><line x1="-0.0" y1="-46.0" x2="-0.0" y2="-62.0" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/><line x1="32.5" y1="-32.5" x2="43.8" y2="-43.8" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/>
+      <circle r="16" fill="#0b1226"/>
+    </g>
+  
+  </g>
+</svg>
