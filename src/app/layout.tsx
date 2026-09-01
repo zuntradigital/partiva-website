@@ -21,6 +21,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Hostinger's deployment replaces the previous build's /_next/static chunks
+// in place (no old-build asset retention like Vercel), so a tab left open
+// across a deploy -- or one that navigates right after -- can request a
+// chunk hash that no longer exists, surfacing as a raw ChunkLoadError /
+// "Failed to fetch dynamically imported module" instead of the new page.
+// One automatic reload (guarded so it can't loop) fetches the current HTML,
+// which references the current deployment's chunk hashes. Mirrors the same
+// fix already shipped in partiva-dashboard's layout.tsx. Runs as a raw
+// script (not a React effect) so it's active even if React fails to mount.
+const CHUNK_ERROR_RELOAD_SCRIPT = `(function(){
+var FLAG='partiva_chunk_reload_attempted';
+function isChunkError(e){
+  var msg=(e&&(e.message||(e.reason&&e.reason.message)))||'';
+  var name=(e&&(e.name||(e.reason&&e.reason.name)))||'';
+  return name==='ChunkLoadError'||/Loading chunk [\\w.-]+ failed/i.test(msg);
+}
+function handle(e){
+  if(!isChunkError(e))return;
+  try{
+    if(sessionStorage.getItem(FLAG))return;
+    sessionStorage.setItem(FLAG,'1');
+  }catch(err){return;}
+  location.reload();
+}
+window.addEventListener('error',handle);
+window.addEventListener('unhandledrejection',handle);
+})();`;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://partiva.tech"),
   title: "Partiva | One complete platform for managing auto-parts businesses",
@@ -56,6 +84,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased ${theme === "dark" ? "dark" : ""}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: CHUNK_ERROR_RELOAD_SCRIPT }} />
+      </head>
 
       {/* suppressHydrationWarning here only covers body's own attributes (not
           its subtree) -- needed because browser extensions like ColorZilla
