@@ -12,7 +12,6 @@ import { resolveMainAndExtras, type PageSection } from "@/src/app/lib/pagesApi";
 const API = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:5000";
 
 type BusinessActivity = "" | "retail" | "wholesale" | "importer" | "workshop";
-type Tier = "" | "basic" | "professional" | "enterprise" | "free";
 
 type FormState = {
   tradeName: string;
@@ -22,7 +21,6 @@ type FormState = {
   contactEmail: string;
   contactPhone: string;
   city: string;
-  tier: Tier;
   consent: boolean;
 };
 
@@ -36,7 +34,6 @@ const initialState: FormState = {
   contactEmail: "",
   contactPhone: "",
   city: "",
-  tier: "",
   consent: false,
 };
 
@@ -49,12 +46,6 @@ const businessActivities: { value: BusinessActivity; labelAr: string; labelEn: s
   { value: "wholesale", labelAr: "موزع بالجملة", labelEn: "Wholesale distributor" },
   { value: "importer", labelAr: "مستورد", labelEn: "Importer" },
   { value: "workshop", labelAr: "ورشة", labelEn: "Workshop" },
-];
-
-const tiers: { value: Tier; labelAr: string; labelEn: string }[] = [
-  { value: "basic", labelAr: "الأساسية", labelEn: "Basic" },
-  { value: "professional", labelAr: "الاحترافية", labelEn: "Professional" },
-  { value: "enterprise", labelAr: "المؤسسية", labelEn: "Enterprise" },
 ];
 
 function validateField(
@@ -89,10 +80,6 @@ function validateField(
       if (!PHONE_PATTERN.test(values.contactPhone.trim()))
         return isArabic ? "أدخل رقم جوال صحيح" : "Enter a valid mobile number";
       return "";
-    case "tier":
-      if (!values.tier)
-        return isArabic ? "اختر خطة الاشتراك" : "Choose a subscription plan";
-      return "";
     case "consent":
       if (!values.consent)
         return isArabic
@@ -112,7 +99,6 @@ const requiredFields: FieldName[] = [
   "contactName",
   "contactEmail",
   "contactPhone",
-  "tier",
   "consent",
 ];
 
@@ -145,8 +131,6 @@ export default function RegisterContent() {
         cityLabel: "المدينة / الفرع",
         emailLabel: "البريد الإلكتروني",
         phoneLabel: "رقم الجوال",
-        tierLabel: "خطة الاشتراك",
-        tierPlaceholder: "اختر خطة الاشتراك",
         consentLabel: "أوافق على سياسة الخصوصية والشروط والأحكام",
         crNumberDuplicate: "هذا رقم السجل التجاري مسجل بالفعل",
         submitFailure: "تعذر إرسال الطلب",
@@ -168,8 +152,6 @@ export default function RegisterContent() {
         cityLabel: "City / branch",
         emailLabel: "Email address",
         phoneLabel: "Mobile number",
-        tierLabel: "Subscription plan",
-        tierPlaceholder: "Choose subscription plan",
         consentLabel: "I agree to the Privacy Policy and Terms & Conditions",
         crNumberDuplicate: "This commercial registration number is already registered",
         submitFailure: "Unable to submit the request",
@@ -462,22 +444,6 @@ export default function RegisterContent() {
               />
             </FormField>
           </div>
-
-          <FormField label={copy.tierLabel} error={touched.tier ? errors.tier : ""}>
-            <select
-              value={values.tier}
-              onChange={(e) => handleChange("tier", e.target.value as Tier)}
-              onBlur={() => handleBlur("tier")}
-              className={inputClass(!!touched.tier && !!errors.tier)}
-            >
-              <option value="">{copy.tierPlaceholder}</option>
-              {tiers.map((t) => (
-                <option key={t.value} value={t.value}>
-                  {isArabic ? t.labelAr : t.labelEn}
-                </option>
-              ))}
-            </select>
-          </FormField>
 
           <div>
             <label className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">

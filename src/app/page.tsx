@@ -14,6 +14,7 @@ import WhatIsPartivaSection from "../components/HomeStory/WhatIsPartivaSection";
 import CoreValuePillarsSection from "../components/HomeStory/CoreValuePillarsSection";
 import SolutionsSection from "../components/HomeStory/SolutionsSection";
 import BusinessNetworkSection from "../components/HomeStory/BusinessNetworkSection";
+import AmbientSpotlights from "../components/HomeStory/AmbientSpotlights";
 import { fetchPages, DATA_SECTION_KEYS, type PageSection } from "./lib/pagesApi";
 import { fetchMedia, resolveMedia } from "./lib/mediaApi";
 import { fetchPricing } from "./lib/pricingApi";
@@ -133,6 +134,7 @@ export default async function Home() {
 
   return (
     <>
+      <AmbientSpotlights />
       <StoryProgressRail />
       {sections.map((section) => {
         const render = SECTION_RENDERERS[section.key];

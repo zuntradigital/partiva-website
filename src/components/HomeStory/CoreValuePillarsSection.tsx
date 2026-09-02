@@ -41,8 +41,8 @@ export default function CoreValuePillarsSection({ titleAr, titleEn, bodyAr, body
             const Icon = ICONS[i % ICONS.length];
             return (
               <RevealOnScroll key={p.num} className="h-full" amount={0.4} margin="0px 0px -10%" delay={(i % 5) * 0.08}>
-                <div className="motion-card group relative flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 pt-8 dark:border-neutral-800 dark:bg-neutral-900">
-                  <span className="pointer-events-none absolute end-4 top-3 text-5xl font-extrabold text-neutral-100 dark:text-neutral-800" aria-hidden="true">
+                <div className="motion-card group relative flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 pt-8 shadow-sm dark:border-white/10 dark:bg-[#0d1733]">
+                  <span className="pointer-events-none absolute end-4 top-3 text-5xl font-extrabold text-neutral-100 dark:text-white/5" aria-hidden="true">
                     {p.num}
                   </span>
                   <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 transition-colors group-hover:bg-blue-100 dark:bg-blue-500/10 dark:group-hover:bg-blue-500/20">
@@ -50,6 +50,7 @@ export default function CoreValuePillarsSection({ titleAr, titleEn, bodyAr, body
                   </div>
                   <h3 className="relative mt-4 text-sm font-bold text-neutral-900 dark:text-white">{p.label}</h3>
                   <p className="relative mt-1.5 text-xs leading-6 text-neutral-500 dark:text-neutral-400">{p.sentence}</p>
+                  <div className="relative mt-4 h-0.5 w-8 rounded-full bg-blue-600 dark:bg-blue-500" />
                 </div>
               </RevealOnScroll>
             );

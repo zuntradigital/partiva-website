@@ -32,7 +32,7 @@ export default function SolutionsSection({ titleAr, titleEn, bodyAr, bodyEn }: {
   const segments = parseSegments(body);
 
   return (
-    <section dir={isArabic ? "rtl" : "ltr"} className="bg-neutral-50 px-6 py-16 dark:bg-neutral-900/60" lang={locale} data-language-managed data-story-marker>
+    <section dir={isArabic ? "rtl" : "ltr"} className="px-6 py-16" lang={locale} data-language-managed data-story-marker>
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-neutral-900 dark:text-white sm:text-3xl">{title}</h2>
@@ -43,7 +43,7 @@ export default function SolutionsSection({ titleAr, titleEn, bodyAr, bodyEn }: {
             const Icon = ICONS[i % ICONS.length];
             return (
               <RevealOnScroll key={s.segment} className="h-full" amount={0.35} margin="0px 0px -10%" delay={(i % 3) * 0.1}>
-                <div className="motion-card group flex h-full flex-col rounded-xl bg-white p-6 ring-1 ring-neutral-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-neutral-800 dark:ring-neutral-700">
+                <div className="motion-card group flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-white/10 dark:bg-[#0d1733]">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-50 transition-colors group-hover:bg-blue-100 dark:bg-blue-500/10 dark:group-hover:bg-blue-500/20">
                     <Icon className="h-5 w-5 text-blue-600 dark:text-blue-400" strokeWidth={1.75} aria-hidden="true" />
                   </div>

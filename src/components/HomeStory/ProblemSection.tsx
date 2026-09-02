@@ -14,11 +14,15 @@ export default function ProblemSection({ titleAr, titleEn, bodyAr, bodyEn }: { t
 
   return (
     <section dir={isArabic ? "rtl" : "ltr"} className="px-6 py-16" lang={locale} data-language-managed data-story-marker>
-      <div className="relative mx-auto max-w-3xl text-center">
-        <Quote className="mx-auto h-9 w-9 text-blue-200 dark:text-blue-500/20" strokeWidth={1.5} aria-hidden="true" />
-        <h2 className="mt-4 text-2xl font-bold leading-snug text-neutral-900 dark:text-white sm:text-3xl">{title}</h2>
-        {body && <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-neutral-500 dark:text-neutral-400">{body}</p>}
-        <div className="mx-auto mt-7 h-1 w-14 rounded-full bg-blue-600" />
+      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-neutral-200 bg-white px-6 py-14 text-center shadow-sm dark:border-white/10 dark:bg-[#0d1733] sm:px-10">
+        {/* Same soft glow language as the Hero, scaled down -- dark-mode
+            only, since the light card reads cleanly without it. */}
+        <div className="motion-glow pointer-events-none absolute left-1/2 top-0 hidden h-64 w-96 -translate-x-1/2 -translate-y-1/3 rounded-full bg-blue-500/20 blur-3xl dark:block" aria-hidden="true" />
+
+        <Quote className="relative mx-auto h-9 w-9 text-blue-200 dark:text-blue-400/30" strokeWidth={1.5} aria-hidden="true" />
+        <h2 className="relative mt-4 text-2xl font-bold leading-snug text-neutral-900 dark:text-white sm:text-3xl">{title}</h2>
+        {body && <p className="relative mx-auto mt-5 max-w-2xl text-base leading-8 text-neutral-500 dark:text-neutral-400">{body}</p>}
+        <div className="relative mx-auto mt-7 h-1 w-14 rounded-full bg-blue-600" />
       </div>
     </section>
   );

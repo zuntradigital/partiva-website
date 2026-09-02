@@ -54,7 +54,7 @@ export default function FeaturesSection({
 
   return (
     <LazyMotion features={loadFeatures} strict>
-    <section dir={isArabic ? "rtl" : "ltr"} className="bg-gray-50 py-20 dark:bg-slate-900" lang={locale} data-language-managed>
+    <section dir={isArabic ? "rtl" : "ltr"} className="py-20" lang={locale} data-language-managed>
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
         <m.div
@@ -79,7 +79,7 @@ export default function FeaturesSection({
             return (
             <m.div
               key={`${titleEn}-${index}`}
-              className="rounded-2xl bg-white p-8 text-center shadow-sm ring-1 ring-gray-100 transition-shadow hover:shadow-md dark:bg-slate-800 dark:ring-slate-700"
+              className="rounded-2xl border border-neutral-200 bg-white p-8 text-center shadow-sm transition-shadow hover:shadow-md dark:border-white/10 dark:bg-[#0d1733]"
               initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 30, scale: 0.97 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               whileHover={reduceMotion ? undefined : { y: -6 }}

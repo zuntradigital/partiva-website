@@ -24,16 +24,16 @@ export default function CTASection({
         title: override?.titleAr || "جاهز للانطلاق؟",
         description:
           override?.bodyAr ||
-          "ابدأ تجربتك المجانية الآن واكتشف كيف يمكن لـ Partiva تحويل إدارة عملك إلى تجربة أكثر ذكاءً وسهولة",
-        cta: override?.ctaLabelAr || "ابدأ تجربتك المجانية",
+          "انضم إلى Partiva مجانًا واكتشف كيف يمكنها تحويل إدارة عملك إلى تجربة أكثر ذكاءً وسهولة، بدون اشتراك شهري.",
+        cta: override?.ctaLabelAr || "انضم إلى Partiva مجانًا",
         imageAlt: "واجهة منصة Partiva لإدارة الأعمال",
       }
     : {
         title: override?.titleEn || "Ready to get started?",
         description:
           override?.bodyEn ||
-          "Start your free trial and see how Partiva makes business management smarter and simpler.",
-        cta: override?.ctaLabelEn || "Start your free trial",
+          "Join Partiva for free and see how it makes business management smarter and simpler — no monthly subscription.",
+        cta: override?.ctaLabelEn || "Join Partiva Free",
         imageAlt: "Partiva business management platform interface",
       };
   const ctaHref = override?.ctaHref || "/register";
@@ -41,7 +41,7 @@ export default function CTASection({
   return (
     <section
       dir={isArabic ? "rtl" : "ltr"}
-      className="bg-gray-50 px-6 py-12 dark:bg-slate-900"
+      className="px-6 py-12"
       lang={locale}
       data-language-managed
     >

@@ -8,6 +8,7 @@
 // page's own audience breakdown, so it isn't repeated a third time here.
 
 import Link from "next/link";
+import { MessageCircle } from "lucide-react";
 import { useLanguage } from "@/src/components/LanguageProvider/LanguageProvider";
 import FeatureHighlights from "@/src/components/FeatureHighlights/FeatureHighlights";
 import RevealOnScroll from "@/src/components/RevealOnScroll/RevealOnScroll";
@@ -56,8 +57,8 @@ export default function FeaturesPageClient({
     <main dir={isArabic ? "rtl" : "ltr"} lang={locale} data-language-managed className="mx-auto max-w-5xl px-6 py-16">
       <RevealOnScroll>
       <section className="motion-text text-center" id="features">
-        <span className="inline-block rounded-md bg-blue-50 px-3 py-1 text-xs font-medium text-blue-800 dark:bg-blue-500/10 dark:text-blue-300">{copy.badge}</span>
-        <h1 className="mx-auto mt-3 max-w-xl text-2xl font-medium text-neutral-900 dark:text-white">{copy.heroTitle}</h1>
+        <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-800 dark:bg-white/5 dark:text-blue-300 dark:ring-1 dark:ring-white/10">{copy.badge}</span>
+        <h1 className="mx-auto mt-4 max-w-2xl text-3xl font-bold text-neutral-900 dark:text-white sm:text-4xl">{copy.heroTitle}</h1>
         <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-neutral-600 dark:text-neutral-400">{copy.heroDescription}</p>
       </section>
       </RevealOnScroll>
@@ -67,24 +68,29 @@ export default function FeaturesPageClient({
       </div>
 
       <RevealOnScroll className="mt-10">
-      <section className="motion-enter flex flex-col gap-4 rounded-xl border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/60 p-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm font-medium text-neutral-900 dark:text-white">{copy.teaserTitle}</p>
-          <p className="mt-1 text-xs leading-5 text-neutral-600 dark:text-neutral-400">{copy.teaserDescription}</p>
+      <section className="motion-enter flex flex-col gap-4 rounded-xl border border-neutral-200 bg-neutral-50 p-5 dark:border-white/10 dark:bg-[#0d1733] sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-4">
+          <div className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-600 shadow-[0_0_30px_-8px_rgba(59,130,246,0.6)] sm:flex">
+            <MessageCircle className="h-5 w-5 text-white" strokeWidth={1.75} aria-hidden="true" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-neutral-900 dark:text-white">{copy.teaserTitle}</p>
+            <p className="mt-1 text-xs leading-5 text-neutral-600 dark:text-neutral-400">{copy.teaserDescription}</p>
+          </div>
         </div>
-        <Link href="/pricing" className="w-fit whitespace-nowrap rounded-md border border-neutral-300 px-4 py-2 text-xs font-medium text-neutral-900 dark:text-white transition hover:bg-white dark:border-neutral-700 dark:hover:bg-neutral-800">
+        <Link href="/pricing" className="w-fit whitespace-nowrap rounded-full border border-neutral-300 px-4 py-2 text-xs font-medium text-neutral-900 transition hover:bg-white dark:border-white/15 dark:text-white dark:hover:bg-white/5">
           {copy.comparePlans}
         </Link>
       </section>
       </RevealOnScroll>
 
       <RevealOnScroll className="mt-14">
-      <section className="motion-enter rounded-xl border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/60 py-8 text-center">
+      <section className="motion-enter rounded-xl border border-neutral-200 bg-neutral-50 py-8 text-center dark:border-white/10 dark:bg-[#0d1733]">
         <p className="text-base font-medium text-neutral-900 dark:text-white">{copy.closingTitle}</p>
         <p className="mx-auto mt-2 max-w-md text-xs leading-5 text-neutral-600 dark:text-neutral-400">{copy.closingDescription}</p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
-          <Link href="/register" className="rounded-md bg-neutral-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-neutral-800">{copy.registerCompany}</Link>
-          <Link href="/pricing" className="rounded-md border border-neutral-300 px-5 py-2 text-sm font-medium text-neutral-900 dark:text-white transition hover:bg-white dark:border-neutral-700 dark:hover:bg-neutral-800">{copy.viewPricing}</Link>
+          <Link href="/register" className="rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700">{copy.registerCompany}</Link>
+          <Link href="/pricing" className="rounded-full border border-neutral-300 px-5 py-2 text-sm font-medium text-neutral-900 transition hover:bg-white dark:border-white/15 dark:text-white dark:hover:bg-white/5">{copy.viewPricing}</Link>
         </div>
       </section>
       </RevealOnScroll>

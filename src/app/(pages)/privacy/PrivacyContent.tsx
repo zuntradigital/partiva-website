@@ -58,7 +58,7 @@ const arabicContent: PrivacyContent = {
       subsections: [
         {
           heading: "بيانات تسجيل النشاط التجاري",
-          body: "عند تسجيل نشاطك التجاري، نجمع اسم النشاط التجاري، رقم السجل التجاري، نوع النشاط التجاري، اسم جهة الاتصال، البريد الإلكتروني، رقم الجوال، المدينة/الفرع، وخطة الاشتراك التي تختارها.",
+          body: "عند تسجيل نشاطك التجاري، نجمع اسم النشاط التجاري، رقم السجل التجاري، نوع النشاط التجاري، اسم جهة الاتصال، البريد الإلكتروني، رقم الجوال، والمدينة/الفرع.",
         },
         {
           heading: "بيانات تسجيل الدخول",
@@ -121,7 +121,7 @@ const englishContent: PrivacyContent = {
       subsections: [
         {
           heading: "Business Registration Information",
-          body: "When you register your business, we collect the business name, commercial registration number, business activity, contact name, email address, mobile number, city/branch, and the subscription plan you choose.",
+          body: "When you register your business, we collect the business name, commercial registration number, business activity, contact name, email address, mobile number, and city/branch.",
         },
         {
           heading: "Login Information",

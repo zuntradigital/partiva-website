@@ -97,7 +97,7 @@ export default function HowItWorksSection({
   return (
     <section
       dir={isArabic ? "rtl" : "ltr"}
-      className="bg-gray-50 py-20 dark:bg-slate-900"
+      className="py-20"
       lang={locale}
       data-language-managed
     >

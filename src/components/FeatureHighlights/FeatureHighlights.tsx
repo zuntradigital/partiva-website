@@ -46,12 +46,12 @@ export default function FeatureHighlights({ sections }: { sections: PageSection[
     <RevealOnScroll amount={0.2} margin="0px 0px -8%">
     <section
       dir={isArabic ? "rtl" : "ltr"}
-      className="rounded-2xl border border-neutral-200 bg-neutral-50 px-6 py-14 dark:border-neutral-800 dark:bg-neutral-900/60 sm:px-10"
+      className="rounded-2xl border border-neutral-200 bg-neutral-50 px-6 py-14 dark:border-white/10 dark:bg-[#0d1733] sm:px-10"
       lang={locale}
       data-language-managed
     >
       <div className="text-center">
-        <span className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">{copy.badge}</span>
+        <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-600 dark:bg-white/5 dark:text-blue-400 dark:ring-1 dark:ring-white/10">{copy.badge}</span>
         <h2 className="mt-3 text-2xl font-bold text-neutral-900 dark:text-white sm:text-3xl">{copy.title}</h2>
         <div className="mx-auto mt-4 h-1 w-14 rounded-full bg-blue-600" />
         <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">{copy.subtitle}</p>
@@ -62,7 +62,7 @@ export default function FeatureHighlights({ sections }: { sections: PageSection[
           const Icon = ICONS[s.key] ?? Sparkles;
           return (
             <RevealOnScroll key={s.id} className="h-full" amount={0.4} margin="0px 0px -10%" delay={(index % 9) * 0.08}>
-              <div className="motion-card group flex h-full flex-col rounded-xl bg-white p-6 ring-1 ring-neutral-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-neutral-800 dark:ring-neutral-700">
+              <div className="motion-card group flex h-full flex-col rounded-xl border border-neutral-200 bg-white p-6 shadow-[0_0_25px_-15px_rgba(59,130,246,0.4)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:shadow-[0_0_35px_-10px_rgba(59,130,246,0.55)] dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_0_30px_-15px_rgba(59,130,246,0.5)] dark:hover:border-blue-400/30 dark:hover:shadow-[0_0_45px_-10px_rgba(59,130,246,0.65)]">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-50 transition-colors group-hover:bg-blue-100 dark:bg-blue-500/10 dark:group-hover:bg-blue-500/20">
                   <Icon className="h-5 w-5 text-blue-600 dark:text-blue-400" strokeWidth={1.75} aria-hidden="true" />
                 </div>

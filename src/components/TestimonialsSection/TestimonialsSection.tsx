@@ -85,7 +85,7 @@ export default function TestimonialsSection({
   return (
     <section
       dir={isArabic ? "rtl" : "ltr"}
-      className="bg-gray-50 py-16 dark:bg-slate-900"
+      className="py-16"
       lang={locale}
       data-language-managed
     >

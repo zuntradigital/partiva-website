@@ -9,7 +9,7 @@ const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
 const MANAGED_SLUGS = new Set([
   "home", "features", "how-it-works", "pricing", "articles", "faq", "about",
   "contact", "help", "support", "privacy", "terms", "login", "register", "forgot-password",
-  "solutions", "business-network",
+  "solutions", "business-network", "for-merchants",
 ]);
 
 function slugOf(pathname: string): string {

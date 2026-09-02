@@ -23,6 +23,23 @@
 html[data-locale="en"] [dir="rtl"] { direction: ltr !important; }
 html[data-locale="en"] .text-right { text-align: left; }
 
+/* Geist (English/Latin) never actually applied anywhere before this --
+   next/font only exposes it as a CSS variable, and nothing referenced that
+   variable as an actual font-family, so every page was silently rendering
+   in each browser's own default sans-serif in both languages. Cairo covers
+   Arabic (Geist has no Arabic glyphs) and matches the Dashboard's font
+   choice for cross-product consistency; `lang` is what layout.tsx already
+   sets on <html> per request, so it's the reliable switch (data-locale is
+   never actually set anywhere despite being referenced above -- unrelated
+   dead rule, left as-is). */
+html {
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+html[lang="ar"] {
+  font-family: var(--font-cairo), var(--font-geist-sans), Tahoma, Arial, sans-serif;
+}
+
 html {
   color-scheme: light;
 }
@@ -61,6 +78,32 @@ html.dark {
 @keyframes partiva-pulse {
   0%, 100% { opacity: .45; transform: scale(.96); }
   50% { opacity: .8; transform: scale(1.04); }
+}
+
+/* Hero light-beam rays (SRS: "same lighting effect as lines"): a slow
+   opacity/height shimmer per beam, staggered via animation-delay so they
+   don't pulse in unison -- reads as ambient light breathing, not a strobe. */
+@keyframes partiva-beam-shimmer {
+  0%, 100% { opacity: .18; transform: scaleY(0.94); }
+  50% { opacity: .55; transform: scaleY(1.03); }
+}
+
+.motion-beam {
+  animation: partiva-beam-shimmer 5.5s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+/* Slow drifting rotation for the hero's aurora/neon swirl shapes -- distinct
+   from .motion-glow's in-place pulse, this actually turns, echoing the
+   curved (not straight) light in the neon reference. Kept very slow (40s)
+   so it reads as ambient drift, never as something spinning. */
+@keyframes partiva-swirl-drift {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.motion-swirl {
+  animation: partiva-swirl-drift 46s linear infinite;
 }
 
 .motion-reveal {

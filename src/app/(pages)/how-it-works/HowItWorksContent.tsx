@@ -26,13 +26,13 @@ import { usePrefersReducedMotion } from "@/src/app/lib/usePrefersReducedMotion";
 const STEP_ICONS = [FileText, Clock, Mail, Rocket];
 
 const defaultStepsAr = [
-  { number: "1", title: "التسجيل", description: "تملى بيانات نشاطك التجاري وتختار الخطة المناسبة لك." },
+  { number: "1", title: "التسجيل", description: "تملى بيانات نشاطك التجاري مجانًا بالكامل." },
   { number: "2", title: "المراجعة", description: "فريقنا بيراجع الطلب قبل أي تفعيل — الطلب بيكون بحالة قيد المراجعة." },
   { number: "3", title: "الاعتماد", description: "بتوصلك رسالة على الإيميل بقرار الطلب — قبول أو رفض." },
   { number: "4", title: "البدء الفعلي", description: "لما يتم قبول طلبك، تقدر تدخل بحسابك وتبدأ تستخدم المنصة." },
 ];
 const defaultStepsEn = [
-  { number: "1", title: "Registration", description: "Fill in your business details and choose the plan that fits you." },
+  { number: "1", title: "Registration", description: "Fill in your business details — registration is completely free." },
   { number: "2", title: "Review", description: "Our team reviews your request before activation — the request remains under review." },
   { number: "3", title: "Approval", description: "You receive an email with the request decision — approved or rejected." },
   { number: "4", title: "Getting started", description: "Once your request is approved, you can sign in and start using the platform." },

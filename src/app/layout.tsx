@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Cairo } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer"
@@ -19,6 +19,17 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Geist has no Arabic glyphs, so Arabic text was silently falling back to
+// each browser's own default sans-serif this whole time (Tailwind's
+// `font-sans` utility was never actually wired to the Geist variable
+// either -- see globals.css). Cairo matches the Dashboard's own font choice
+// for cross-product consistency.
+const cairo = Cairo({
+  variable: "--font-cairo",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 // Hostinger's deployment replaces the previous build's /_next/static chunks
@@ -82,7 +93,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased ${theme === "dark" ? "dark" : ""}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} h-full antialiased ${theme === "dark" ? "dark" : ""}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: CHUNK_ERROR_RELOAD_SCRIPT }} />

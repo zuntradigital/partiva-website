@@ -3,8 +3,9 @@ import { fetchPricing } from "@/src/app/lib/pricingApi";
 import { fetchPages, resolveMainAndExtras } from "@/src/app/lib/pagesApi";
 import PricingPageClient from "./PricingPageClient";
 
-const TITLE = "Pricing | Partiva";
-const DESCRIPTION = "Plans for every business size. Choose the plan that fits your business.";
+const TITLE = "Pricing | Partiva — No Monthly Subscription, Pay Only When You Sell";
+const DESCRIPTION =
+  "Free merchant registration on Partiva's auto parts marketplace, with no monthly subscription. Your first 100 successful parts or first 90 days are commission-free, whichever comes first — then a simple transaction-based commission applies.";
 
 export const metadata: Metadata = {
   title: TITLE,

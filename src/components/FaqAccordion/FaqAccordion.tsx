@@ -10,6 +10,9 @@ import { useLanguage } from "../LanguageProvider/LanguageProvider";
 type FaqAccordionProps = {
   items: FaqItem[];
   categoryLabels: Record<FaqItem["category"], string>;
+  // Fires when a question is opened (not on close) -- optional, so every
+  // existing caller that doesn't pass it behaves exactly as before.
+  onOpen?: (item: FaqItem) => void;
 };
 
 // Matches the easing already used site-wide for scroll reveals (globals.css).
@@ -20,7 +23,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const loadFeatures = () =>
   import("@/src/components/RevealOnScroll/motion-features").then((mod) => mod.default);
 
-export default function FaqAccordion({ items, categoryLabels }: FaqAccordionProps) {
+export default function FaqAccordion({ items, categoryLabels, onOpen }: FaqAccordionProps) {
   const { locale } = useLanguage();
   const isArabic = locale === "ar";
   const textAlignment = isArabic ? "text-right" : "text-left";
@@ -120,7 +123,10 @@ export default function FaqAccordion({ items, categoryLabels }: FaqAccordionProp
                 )}
                 <button
                   type="button"
-                  onClick={() => setOpenId(isOpen ? null : item.id)}
+                  onClick={() => {
+                    if (!isOpen) onOpen?.(item);
+                    setOpenId(isOpen ? null : item.id);
+                  }}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   className={`flex w-full items-center justify-between gap-4 p-5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900 ${textAlignment}`}

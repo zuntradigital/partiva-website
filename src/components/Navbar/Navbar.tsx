@@ -46,6 +46,12 @@ const navLinks = [
     route: "/pricing",
   },
   {
+    labelAr: "للتجار",
+    labelEn: "For Merchants",
+    section: "/for-merchants",
+    route: "/for-merchants",
+  },
+  {
     labelAr: "المقالات",
     labelEn: "Articles",
     section: "/articles",
@@ -128,6 +134,11 @@ export default function Navbar({
   }, [pathname]);
 
   const isHome = pathname === "/";
+  // Home page only: a floating dark pill nav to match the Hero directly
+  // beneath it (which is likewise always dark, regardless of the site-wide
+  // theme toggle -- same existing precedent, just extended to the bar that
+  // sits on top of it). Every other route keeps the original bar untouched.
+  const pillNav = isHome;
   const visibleLinks = navLinks.filter((link) => visibleNavSlugs.includes(slugOf(link.route)));
   const labelFor = (link: (typeof navLinks)[number]) => {
     const page = pageTitles[slugOf(link.route)];
@@ -174,12 +185,25 @@ export default function Navbar({
         register: "Start free",
       };
 
+  // Shared by the theme toggle, language toggle, login link, and mobile
+  // menu button -- identical border/hover treatment everywhere. Same
+  // scroll-dependent light/dark palette on every route, pill nav included --
+  // only the container shape (bar vs. floating pill) differs by route.
+  const actionBtnClass = `dark:focus-visible:ring-offset-slate-700 ${
+    isScrolled
+      ? "border-blue-200 text-slate-700 hover:bg-blue-200 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+      : "border-gray-200 text-slate-700 hover:bg-blue-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+  }`;
+
   return (
     <header
       dir={isArabic ? "rtl" : "ltr"}
       lang={locale}
       data-language-managed
-      className={`
+      className={
+        pillNav
+          ? "fixed inset-x-0 top-0 z-50 px-3 pt-3 transition-all duration-300 sm:px-5"
+          : `
         sticky top-0 z-50
         transition-all duration-300
         ${
@@ -187,16 +211,28 @@ export default function Navbar({
             ? "bg-slate-400 shadow-md dark:bg-slate-600"
             : "bg-white shadow-sm dark:bg-slate-700"
         }
-      `}
+      `
+      }
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+      <div
+        className={
+          pillNav
+            ? `mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full px-5 py-2.5 ring-1 ring-black/5 backdrop-blur-md transition-colors duration-300 dark:ring-white/10 ${
+                isScrolled ? "bg-slate-400/90 shadow-lg dark:bg-slate-600/90" : "bg-white/90 shadow-sm dark:bg-slate-700/85"
+              }`
+            : "mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3"
+        }
+      >
         {/* Logo */}
-        <Link href="/" className="flex shrink-0 items-center rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-700">
-          <img src={logoSrc} alt={logoAlt} width={120} height={40} className="h-11 w-auto" />
+        <Link
+          href="/"
+          className="flex shrink-0 items-center rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-700"
+        >
+          <img src={logoSrc} alt={logoAlt} width={120} height={40} className="h-9 w-auto sm:h-11" />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden min-w-0 items-center gap-0.5 overflow-x-auto md:flex lg:gap-1">
+        <nav className="hidden min-w-0 items-center gap-0 overflow-x-auto lg:flex">
           {visibleLinks.map((link) => {
             const href =
               link.route === "/"
@@ -212,7 +248,7 @@ export default function Navbar({
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={`
-                  nav-underline whitespace-nowrap rounded-full px-2 py-2 text-sm font-medium
+                  nav-underline whitespace-nowrap rounded-full px-1.5 py-2 text-[13px] font-medium
                   transition-colors
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-700
                   ${
@@ -243,12 +279,8 @@ export default function Navbar({
             className={`
               flex h-9 w-9 items-center justify-center
               rounded-full border transition-colors
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-700
-              ${
-                isScrolled
-                  ? "border-blue-200 text-slate-700 hover:bg-blue-200 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-                  : "border-gray-200 text-slate-700 hover:bg-blue-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-              }
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2
+              ${actionBtnClass}
             `}
           >
             {theme === "dark" ? (
@@ -271,12 +303,8 @@ export default function Navbar({
             className={`
               flex h-9 w-9 items-center justify-center
               rounded-full border transition-colors
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-700
-              ${
-                isScrolled
-                  ? "border-blue-200 text-slate-700 hover:bg-blue-200 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-                  : "border-gray-200 text-slate-700 hover:bg-blue-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-              }
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2
+              ${actionBtnClass}
             `}
           >
             <span className="text-xs font-semibold uppercase">
@@ -292,12 +320,8 @@ export default function Navbar({
             className={`
               hidden whitespace-nowrap rounded-full border px-4 py-2
               text-sm font-medium transition-colors md:block
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-700
-              ${
-                isScrolled
-                  ? "border-blue-200 text-slate-700 hover:bg-blue-200 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-                  : "border-gray-200 text-slate-700 hover:bg-blue-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-              }
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2
+              ${actionBtnClass}
             `}
           >
             {copy.login}
@@ -325,12 +349,8 @@ export default function Navbar({
             className={`
               flex h-9 w-9 items-center justify-center
               rounded-full border transition-colors md:hidden
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-700
-              ${
-                isScrolled
-                  ? "border-blue-200 text-slate-700 hover:bg-blue-200 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-                  : "border-gray-200 text-slate-700 hover:bg-blue-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-              }
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2
+              ${actionBtnClass}
             `}
           >
             <Menu className="h-5 w-5" aria-hidden="true" />

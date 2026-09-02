@@ -49,23 +49,23 @@ const arabicContent: TermsContent = {
     },
     {
       id: "plans",
-      heading: "خطط الاشتراك والأسعار",
-      body: "تعرض Partiva عدة خطط اشتراك — التجربة المجانية، الأساسية، الاحترافية، والمؤسسية — بأسعار معروضة بالريال السعودي على صفحة الأسعار. تتوفر أيضًا خطط مخصصة للأنشطة ذات الاحتياجات الخاصة عبر التواصل معنا.",
+      heading: "التسعير والعمولة",
+      body: "لا تعتمد Partiva على خطط اشتراك شهرية. التسجيل والتفعيل وإدراج المنتجات والظهور على الشبكة مجانية بالكامل، وتُحصّل Partiva عمولة فقط على المعاملات الناجحة التي تتم عبر المنصة. للتفاصيل الكاملة عن الفترة المجانية وشرائح العمولة، راجع صفحة الأسعار.",
     },
     {
       id: "changes",
-      heading: "تغيير الخطة وحدودها",
-      body: "يمكنك تغيير خطة اشتراكك في أي وقت. عند تغيير الخطة، تُطبَّق حدود الخطة الجديدة فورًا.",
+      heading: "تعديل شروط العمولة",
+      body: "قد تُحدَّث Partiva شرائح العمولة أو تفاصيل الفترة المجانية من وقت لآخر وفق الشروط التجارية المعمول بها. يُطبَّق أي تحديث على المعاملات التالية لتاريخ سريانه.",
     },
     {
       id: "trial",
-      heading: "التجربة المجانية",
-      body: "تتيح Partiva تجربة مجانية دون الحاجة لبطاقة ائتمانية، مع إمكانية الإلغاء في أي وقت. راجع صفحة الأسعار للاطلاع على تفاصيل التجربة الحالية.",
+      heading: "الفترة المجانية",
+      body: "لا تعتمد Partiva على تجربة مجانية محدودة المدة قبل الاشتراك. بدلًا من ذلك، أول 100 قطعة ناجحة أو أول 90 يومًا من تفعيل الحساب بدون عمولة، أيهما يأتي أولًا. راجع صفحة الأسعار للتفاصيل الكاملة.",
     },
     {
       id: "refund",
-      heading: "ضمان الاسترجاع",
-      body: "توفر Partiva ضمان استرجاع كامل خلال 14 يوم من الدفع.",
+      heading: "لا رسوم مقدمة",
+      body: "لا تفرض Partiva أي رسوم مقدمة عند التسجيل أو التفعيل، وبالتالي لا يوجد مبلغ اشتراك يستوجب استرجاعه. أي مسائل متعلقة بالمعاملات تخضع للشروط التجارية المعمول بها لدى Partiva.",
     },
     {
       id: "network",
@@ -105,23 +105,23 @@ const englishContent: TermsContent = {
     },
     {
       id: "plans",
-      heading: "Subscription Plans & Pricing",
-      body: "Partiva offers several subscription plans — Free Trial, Basic, Professional, and Enterprise — priced in Saudi Riyals on the Pricing page. Custom plans are also available for businesses with special requirements by contacting us.",
+      heading: "Pricing & Commission",
+      body: "Partiva does not offer monthly subscription plans. Registration, activation, product listing, and network visibility are entirely free, and Partiva only earns a commission on successful transactions completed through the platform. See the Pricing page for full details on the free period and commission tiers.",
     },
     {
       id: "changes",
-      heading: "Changing Your Plan and Its Limits",
-      body: "You can change your subscription plan at any time. When you change plans, the new plan's limits are applied immediately.",
+      heading: "Changes to Commission Terms",
+      body: "Partiva may update the commission tiers or free-period details from time to time in line with its applicable commercial terms. Any update applies to transactions from its effective date onward.",
     },
     {
       id: "trial",
-      heading: "Free Trial",
-      body: "Partiva offers a free trial with no credit card required, and you can cancel at any time. See the Pricing page for the current trial details.",
+      heading: "Free Launch Period",
+      body: "Partiva does not offer a time-limited free trial before a subscription starts. Instead, your first 100 successful parts or your first 90 days from account activation are commission-free, whichever comes first. See the Pricing page for full details.",
     },
     {
       id: "refund",
-      heading: "Refund Guarantee",
-      body: "Partiva offers a full refund guarantee within 14 days of payment.",
+      heading: "No Upfront Fees",
+      body: "Partiva does not charge any upfront fees for registration or activation, so there is no subscription payment to refund. Any transaction-related matters are governed by Partiva's applicable commercial terms.",
     },
     {
       id: "network",

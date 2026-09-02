@@ -25,6 +25,7 @@ const STATIC_ROUTES = [
   "forgot-password",
   "solutions",
   "business-network",
+  "for-merchants",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
