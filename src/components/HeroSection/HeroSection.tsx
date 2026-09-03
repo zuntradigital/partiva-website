@@ -101,6 +101,11 @@ const HERO_TITLE_HIGHLIGHTS_AR: { phrase: string; className: string }[] = [
   },
 ];
 
+// Two of the previously-tried floating widget screenshots, reused as extra
+// slides for the main product shot below instead of being deleted outright.
+const HERO_SLIDER_EXTRA_IMAGES = ["/images/hero/hero-box-1.jpeg", "/images/hero/hero-box-5.jpeg"];
+const HERO_SLIDER_INTERVAL_MS = 4500;
+
 function renderHighlightedTitle(title: string, highlights: { phrase: string; className: string }[]) {
   const matches = highlights.map(({ phrase, className }) => {
     const start = title.indexOf(phrase);
@@ -171,6 +176,20 @@ export default function HeroSection({
       };
   const ctaHref = override?.ctaHref || "/register";
   const cta2Href = override?.cta2Href || "/features";
+
+  // Product shot slider: the managed/default image plus two extra slides,
+  // auto-advancing and crossfading in place -- same card, same size, same
+  // position, only the picture inside now rotates through three instead of
+  // staying on one.
+  const sliderImages = [image?.src ?? "/images/home.jpeg", ...HERO_SLIDER_EXTRA_IMAGES];
+  const [slideIndex, setSlideIndex] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSlideIndex((i) => (i + 1) % sliderImages.length);
+    }, HERO_SLIDER_INTERVAL_MS);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sliderImages.length]);
 
   return (
     <section
@@ -314,13 +333,20 @@ export default function HeroSection({
 
           <HeroParallax>
             <div className="motion-float relative rounded-3xl bg-white/[0.03] p-3 ring-1 ring-white/10 shadow-2xl shadow-black/40 sm:p-4">
-              <img
-                src={image?.src ?? "/images/home.jpeg"}
-                alt={(isArabic ? image?.altAr : image?.altEn) || copy.imageAlt}
-                width={1400}
-                height={820}
-                className="h-auto w-full rounded-2xl object-contain"
-              />
+              <div className="relative aspect-[1400/820] w-full">
+                {sliderImages.map((src, i) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={i === 0 ? (isArabic ? image?.altAr : image?.altEn) || copy.imageAlt : ""}
+                    aria-hidden={i === 0 ? undefined : true}
+                    width={1400}
+                    height={820}
+                    className="absolute inset-0 h-full w-full rounded-2xl object-contain transition-opacity duration-700 ease-in-out"
+                    style={{ opacity: i === slideIndex ? 1 : 0 }}
+                  />
+                ))}
+              </div>
 
               <div className="absolute -top-4 -end-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 shadow-lg shadow-blue-600/30 ring-4 ring-[#0a1229]">
                 <Sparkles className="h-5 w-5 text-white" aria-hidden="true" />
