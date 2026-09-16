@@ -5,6 +5,25 @@ import type { Article } from "@/src/app/types/article";
 
 const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
 
+// Cover images uploaded through the Dashboard's Media Library are now real
+// files stored on the backend and referenced by a backend-relative path
+// under "/uploads/..." (see partiva-admin-backend's media module), not a
+// self-contained base64 data URL -- so unlike a `data:` cover (still
+// supported for older/legacy articles, resolves on its own) it must be
+// resolved against the backend's own origin before the browser requests it,
+// or it would resolve against this Website's origin instead and 404. Only
+// this specific prefix is rewritten -- a plain "/..." path is left alone,
+// since that shape is also valid for a legacy Website-relative cover
+// (isSafeHref) and must keep resolving against the Website's own origin.
+function resolveCoverSrc(src: string): string {
+  return src.startsWith("/uploads/") ? `${BACKEND_URL}${src}` : src;
+}
+
+function resolveArticleCover(article: Article): Article {
+  if (!article.cover?.src) return article;
+  return { ...article, cover: { ...article.cover, src: resolveCoverSrc(article.cover.src) } };
+}
+
 interface ApiSuccess<T> {
   success: true;
   data: T;
@@ -30,7 +49,7 @@ async function fetchJson<T>(path: string): Promise<T | null> {
 
 export async function fetchAllArticles(): Promise<Article[]> {
   const data = await fetchJson<Article[]>("/api/articles");
-  return data ?? [];
+  return (data ?? []).map(resolveArticleCover);
 }
 
 // Deliberately does not reuse fetchJson: that helper collapses every
@@ -57,5 +76,5 @@ export async function fetchArticleBySlug(slug: string): Promise<Article | null> 
 
   const json = (await response.json().catch(() => null)) as ApiSuccess<Article> | ApiFailure | null;
   if (!json || json.success === false) throw new Error("Articles API returned an invalid response");
-  return json.data;
+  return resolveArticleCover(json.data);
 }

@@ -9,11 +9,15 @@ const isDev = process.env.NODE_ENV === "development";
 // API (they're client components driven by the language/locale context, so a
 // server component fetch isn't an option), so connect-src must allow it.
 const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || "http://localhost:5000";
+// Article cover images uploaded via the Dashboard's Media Library are real
+// files served from the backend's own origin (partiva-admin-backend's
+// /uploads route), not a same-site path or a self-contained data: URL, so
+// both the CSP and next/image's remote-image allowlist below must permit it.
 const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
   style-src 'self' 'unsafe-inline';
-  img-src 'self' data:;
+  img-src 'self' data: ${backendApiUrl};
   font-src 'self';
   connect-src 'self' ${backendApiUrl};
   object-src 'none';
@@ -24,6 +28,8 @@ const cspHeader = `
 `
   .replace(/\s{2,}/g, " ")
   .trim();
+
+const backendUrl = new URL(backendApiUrl);
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
@@ -43,6 +49,18 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Lets next/image optimize article cover images uploaded via the
+    // Dashboard's Media Library, which are real files served from the
+    // backend's own origin under /uploads/media/* -- narrowed to that one
+    // path so no other backend route is treated as an image source.
+    remotePatterns: [
+      {
+        protocol: backendUrl.protocol.replace(":", "") as "http" | "https",
+        hostname: backendUrl.hostname,
+        port: backendUrl.port || undefined,
+        pathname: "/uploads/media/**",
+      },
+    ],
   },
   async headers() {
     return [

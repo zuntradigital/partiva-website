@@ -1,9 +1,8 @@
 // app/contact/page.tsx
 // PAGE-CONTACT — "Contact" (linked from the footer's "اتصل بنا" and the FAQ
-// closing CTA). Frontend UI + client-side validation only — no API route
-// exists yet, so submission mirrors the same fetch-based contract already
-// used by the register / forgot-password forms (POST /api/contact) so it
-// can be wired up once that endpoint ships.
+// closing CTA). Submits to POST /api/contact-messages (partiva-admin-backend),
+// which stores each message and surfaces it in the Dashboard's "Contact
+// Requests" section.
 //
 // Contact details below are the ones already published in the footer
 // (WhatsApp number, website, city) — nothing here is invented.
@@ -233,7 +232,11 @@ export default function ContactContent() {
 
     setStatus("submitting");
     try {
-      const res = await fetch("/api/contact", {
+      // Backed by contact_messages (partiva-admin-backend) -- distinct from
+      // GET /api/contact above, which reads the site-wide contact-info
+      // settings singleton, not individual message submissions. Shown in
+      // the Dashboard under "Contact Requests".
+      const res = await fetch(`${API}/api/contact-messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Loader2, CheckCircle2, Building2 } from "lucide-react";
 import { useLanguage } from "@/src/components/LanguageProvider/LanguageProvider";
-import { EMAIL_PATTERN, PHONE_PATTERN, inputClass } from "@/src/app/lib/formValidation";
+import { EMAIL_PATTERN, COMPANY_PHONE_PATTERN, inputClass } from "@/src/app/lib/formValidation";
 import FormField from "@/src/components/FormField/FormField";
 import GenericSection from "@/src/components/GenericSection/GenericSection";
 import RevealOnScroll from "@/src/components/RevealOnScroll/RevealOnScroll";
@@ -77,8 +77,10 @@ function validateField(
         return isArabic ? "أدخل بريد إلكتروني صحيح" : "Enter a valid email address";
       return "";
     case "contactPhone":
-      if (!PHONE_PATTERN.test(values.contactPhone.trim()))
-        return isArabic ? "أدخل رقم جوال صحيح" : "Enter a valid mobile number";
+      if (!COMPANY_PHONE_PATTERN.test(values.contactPhone.trim()))
+        return isArabic
+          ? "رقم الجوال يجب أن يتكون من 11 رقمًا بالضبط"
+          : "The phone number must be exactly 11 digits";
       return "";
     case "consent":
       if (!values.consent)
@@ -225,10 +227,11 @@ export default function RegisterContent() {
     // Submitting
     setStatus("submitting");
     try {
-      // Mirrors [Master: API-0002 POST /tenants]. CR-number duplicate check
-      // happens server-side only, on submit (see §9.2 — avoids leaking
-      // registered-CR existence via blur-time enumeration).
-      const res = await fetch("/api/tenants", {
+      // CR-number duplicate check happens server-side only, on submit (see
+      // §9.2 — avoids leaking registered-CR existence via blur-time
+      // enumeration). Backed by company_requests (partiva-admin-backend),
+      // shown in the Dashboard under "Potential Clients".
+      const res = await fetch(`${API}/api/company-requests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -432,8 +435,9 @@ export default function RegisterContent() {
               <input
                 type="tel"
                 dir="ltr"
+                inputMode="numeric"
                 maxLength={20}
-                placeholder="05XXXXXXXX"
+                placeholder="XXXXXXXXXXX"
                 value={values.contactPhone}
                 onChange={(e) => handleChange("contactPhone", e.target.value)}
                 onBlur={() => handleBlur("contactPhone")}

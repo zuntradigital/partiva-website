@@ -4,6 +4,10 @@ export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Gulf expansion (Master §39). Placeholder covers KSA mobile numbers only.
 export const PHONE_PATTERN = /^(?:\+966|0)?5\d{8}$/;
 
+// Register-your-company form's contact phone: exactly 11 digits, digits only,
+// no country/format assumptions (deliberately not PHONE_PATTERN above).
+export const COMPANY_PHONE_PATTERN = /^\d{11}$/;
+
 export function inputClass(hasError: boolean) {
   return `w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-neutral-900 dark:text-white outline-none transition-colors focus:ring-2 dark:bg-neutral-900 ${
     hasError
