@@ -1,6 +1,8 @@
 // Fetches Media Library assets from the admin backend's public API. Called
 // from Server Components, so this is not subject to CORS and the backend
 // URL is never exposed to client-side code. Mirrors pagesApi.ts.
+import { resolveMediaSrc } from "@/src/app/lib/mediaUrl";
+
 const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
 
 export interface MediaUsage {
@@ -32,7 +34,10 @@ export async function fetchMedia(): Promise<MediaAsset[]> {
     const response = await fetch(`${BACKEND_URL}/api/media`, { next: { revalidate: 30 } });
     const json = (await response.json().catch(() => null)) as ApiSuccess<MediaAsset[]> | null;
     if (!response.ok || !json?.success) return [];
-    return json.data;
+    // Resolved once here, at the source -- every caller (Navbar/Footer logo,
+    // Hero/CTA image, and any future placement) then gets an already-correct
+    // URL with no risk of a call site forgetting to resolve it itself.
+    return json.data.map((asset) => ({ ...asset, url: resolveMediaSrc(asset.url) }));
   } catch {
     return [];
   }

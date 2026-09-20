@@ -2,26 +2,13 @@
 // Server Components (never the browser), so this is not subject to CORS and
 // the backend URL is never exposed to client-side code.
 import type { Article } from "@/src/app/types/article";
+import { resolveMediaSrc } from "@/src/app/lib/mediaUrl";
 
 const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
 
-// Cover images uploaded through the Dashboard's Media Library are now real
-// files stored on the backend and referenced by a backend-relative path
-// under "/uploads/..." (see partiva-admin-backend's media module), not a
-// self-contained base64 data URL -- so unlike a `data:` cover (still
-// supported for older/legacy articles, resolves on its own) it must be
-// resolved against the backend's own origin before the browser requests it,
-// or it would resolve against this Website's origin instead and 404. Only
-// this specific prefix is rewritten -- a plain "/..." path is left alone,
-// since that shape is also valid for a legacy Website-relative cover
-// (isSafeHref) and must keep resolving against the Website's own origin.
-function resolveCoverSrc(src: string): string {
-  return src.startsWith("/uploads/") ? `${BACKEND_URL}${src}` : src;
-}
-
 function resolveArticleCover(article: Article): Article {
   if (!article.cover?.src) return article;
-  return { ...article, cover: { ...article.cover, src: resolveCoverSrc(article.cover.src) } };
+  return { ...article, cover: { ...article.cover, src: resolveMediaSrc(article.cover.src) } };
 }
 
 interface ApiSuccess<T> {

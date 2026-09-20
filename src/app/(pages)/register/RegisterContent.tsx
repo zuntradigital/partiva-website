@@ -3,11 +3,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Loader2, CheckCircle2, Building2 } from "lucide-react";
 import { useLanguage } from "@/src/components/LanguageProvider/LanguageProvider";
-import { EMAIL_PATTERN, COMPANY_PHONE_PATTERN, inputClass } from "@/src/app/lib/formValidation";
+import { EMAIL_PATTERN, PHONE_PATTERN, inputClass } from "@/src/app/lib/formValidation";
 import FormField from "@/src/components/FormField/FormField";
 import GenericSection from "@/src/components/GenericSection/GenericSection";
 import RevealOnScroll from "@/src/components/RevealOnScroll/RevealOnScroll";
 import { resolveMainAndExtras, type PageSection } from "@/src/app/lib/pagesApi";
+import Recaptcha from "@/src/components/Recaptcha/Recaptcha";
 
 const API = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:5000";
 
@@ -77,7 +78,7 @@ function validateField(
         return isArabic ? "أدخل بريد إلكتروني صحيح" : "Enter a valid email address";
       return "";
     case "contactPhone":
-      if (!COMPANY_PHONE_PATTERN.test(values.contactPhone.trim()))
+      if (!PHONE_PATTERN.test(values.contactPhone.trim()))
         return isArabic
           ? "رقم الجوال يجب أن يتكون من 11 رقمًا بالضبط"
           : "The phone number must be exactly 11 digits";
@@ -135,6 +136,8 @@ export default function RegisterContent() {
         phoneLabel: "رقم الجوال",
         consentLabel: "أوافق على سياسة الخصوصية والشروط والأحكام",
         crNumberDuplicate: "هذا رقم السجل التجاري مسجل بالفعل",
+        verifyLabel: "التحقق الأمني",
+        verifyRequired: "يرجى إكمال التحقق من أنك لست روبوتًا",
         submitFailure: "تعذر إرسال الطلب",
         submitFailureRetry: "تعذر إرسال الطلب، حاول مرة أخرى",
         submitting: "جارِ الإرسال...",
@@ -156,6 +159,8 @@ export default function RegisterContent() {
         phoneLabel: "Mobile number",
         consentLabel: "I agree to the Privacy Policy and Terms & Conditions",
         crNumberDuplicate: "This commercial registration number is already registered",
+        verifyLabel: "Security verification",
+        verifyRequired: "Please complete the verification below",
         submitFailure: "Unable to submit the request",
         submitFailureRetry: "Unable to submit the request. Please try again.",
         submitting: "Submitting...",
@@ -172,6 +177,16 @@ export default function RegisterContent() {
   );
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [serverError, setServerError] = useState("");
+
+  // "Are you a robot?" verification (Recaptcha.tsx) -- a real, server-checked
+  // control (see company-requests.routes.ts), not a decorative checkbox.
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaError, setRecaptchaError] = useState("");
+  const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
+  function resetRecaptcha() {
+    setRecaptchaToken(null);
+    setRecaptchaResetKey((k) => k + 1);
+  }
 
   // Generated once per form session, sent with the submission per the
   // idempotency-key recommendation extending Master BR-0047 to tenant creation.
@@ -224,20 +239,29 @@ export default function RegisterContent() {
     const hasErrors = Object.values(nextErrors).some(Boolean);
     if (hasErrors) return;
 
+    if (!recaptchaToken) {
+      setRecaptchaError(copy.verifyRequired);
+      return;
+    }
+    setRecaptchaError("");
+
     // Submitting
     setStatus("submitting");
     try {
       // CR-number duplicate check happens server-side only, on submit (see
       // §9.2 — avoids leaking registered-CR existence via blur-time
       // enumeration). Backed by company_requests (partiva-admin-backend),
-      // shown in the Dashboard under "Potential Clients".
+      // shown in the Dashboard under "Potential Clients". recaptchaToken is
+      // verified server-side against Google's siteverify API before
+      // anything is written to the database -- this client-side check is
+      // UX only.
       const res = await fetch(`${API}/api/company-requests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Idempotency-Key": idempotencyKey.current,
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, recaptchaToken }),
       });
 
       if (!res.ok) {
@@ -248,6 +272,7 @@ export default function RegisterContent() {
             crNumber: copy.crNumberDuplicate,
           }));
           setStatus("idle");
+          resetRecaptcha(); // the token was consumed by verification even though the request was otherwise rejected
           return;
         }
         throw new Error(data?.message || copy.submitFailure);
@@ -259,6 +284,7 @@ export default function RegisterContent() {
       setServerError(
         err instanceof Error ? err.message : copy.submitFailureRetry,
       );
+      resetRecaptcha();
     }
   }
 
@@ -465,6 +491,24 @@ export default function RegisterContent() {
             )}
           </div>
 
+          <div>
+            <span className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">{copy.verifyLabel}</span>
+            <Recaptcha
+              key={`${locale}-${recaptchaResetKey}`}
+              locale={locale}
+              onVerify={(token) => {
+                setRecaptchaToken(token);
+                setRecaptchaError("");
+              }}
+              onExpire={() => setRecaptchaToken(null)}
+            />
+            {recaptchaError && (
+              <p role="alert" aria-live="assertive" className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+                {recaptchaError}
+              </p>
+            )}
+          </div>
+
           {status === "failure" && serverError && (
             <p className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600 dark:bg-red-500/10 dark:text-red-400">
               {serverError}
@@ -473,7 +517,7 @@ export default function RegisterContent() {
 
           <button
             type="submit"
-            disabled={!isFormValid || status === "submitting"}
+            disabled={!isFormValid || status === "submitting" || !recaptchaToken}
             className="btn-motion flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-neutral-300 dark:disabled:bg-neutral-700 dark:focus-visible:ring-offset-neutral-900"
           >
             {status === "submitting" && (
