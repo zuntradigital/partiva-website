@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Loader2, CheckCircle2, Building2 } from "lucide-react";
 import { useLanguage } from "@/src/components/LanguageProvider/LanguageProvider";
-import { EMAIL_PATTERN, PHONE_PATTERN, inputClass } from "@/src/app/lib/formValidation";
+import { EMAIL_PATTERN, PHONE_PATTERN, inputClass, phoneErrorMessage } from "@/src/app/lib/formValidation";
 import FormField from "@/src/components/FormField/FormField";
 import GenericSection from "@/src/components/GenericSection/GenericSection";
 import RevealOnScroll from "@/src/components/RevealOnScroll/RevealOnScroll";
@@ -79,9 +79,7 @@ function validateField(
       return "";
     case "contactPhone":
       if (!PHONE_PATTERN.test(values.contactPhone.trim()))
-        return isArabic
-          ? "رقم الجوال يجب أن يتكون من 11 رقمًا بالضبط"
-          : "The phone number must be exactly 11 digits";
+        return phoneErrorMessage(isArabic);
       return "";
     case "consent":
       if (!values.consent)
@@ -463,7 +461,7 @@ export default function RegisterContent() {
                 dir="ltr"
                 inputMode="numeric"
                 maxLength={20}
-                placeholder="XXXXXXXXXXX"
+                placeholder="XXXXXXXXXX"
                 value={values.contactPhone}
                 onChange={(e) => handleChange("contactPhone", e.target.value)}
                 onBlur={() => handleBlur("contactPhone")}

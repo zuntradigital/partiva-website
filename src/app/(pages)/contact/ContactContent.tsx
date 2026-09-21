@@ -14,7 +14,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle2, Globe, Loader2, Mail, MapPin } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "@/src/components/LanguageProvider/LanguageProvider";
-import { EMAIL_PATTERN, PHONE_PATTERN, inputClass } from "@/src/app/lib/formValidation";
+import { EMAIL_PATTERN, PHONE_PATTERN, inputClass, phoneErrorMessage } from "@/src/app/lib/formValidation";
 import GenericSection from "@/src/components/GenericSection/GenericSection";
 import RevealOnScroll from "@/src/components/RevealOnScroll/RevealOnScroll";
 import Recaptcha from "@/src/components/Recaptcha/Recaptcha";
@@ -76,9 +76,7 @@ function validateField(name: FieldName, values: FormState, isArabic: boolean): s
     case "phone":
       // Optional — only validated when the visitor filled it in.
       if (values.phone.trim() && !PHONE_PATTERN.test(values.phone.trim()))
-        return isArabic
-          ? "رقم الجوال يجب أن يتكون من 11 رقمًا بالضبط"
-          : "The phone number must be exactly 11 digits";
+        return phoneErrorMessage(isArabic);
       return "";
     case "inquiryType":
       if (!values.inquiryType)
@@ -488,7 +486,7 @@ export default function ContactContent() {
                     autoComplete="tel"
                     inputMode="numeric"
                     maxLength={20}
-                    placeholder="XXXXXXXXXXX"
+                    placeholder="XXXXXXXXXX"
                     value={values.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
                     onBlur={() => handleBlur("phone")}
