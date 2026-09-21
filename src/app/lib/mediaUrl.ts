@@ -11,7 +11,7 @@
 //
 // Mirrors partiva-dashboard's src/lib/media.ts `resolveMediaUrl` so both
 // apps resolve the exact same stored value the exact same way.
-const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
+import { BACKEND_URL } from "@/src/app/lib/backendUrl";
 
 export function resolveMediaSrc(src: string): string {
   return src.startsWith("/uploads/") ? `${BACKEND_URL}${src}` : src;

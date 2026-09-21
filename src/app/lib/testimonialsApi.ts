@@ -2,7 +2,7 @@
 // contactApi.ts/pagesApi.ts so this data can be fetched server-side and
 // passed down as a prop (kept live via LiveContentSync's router.refresh())
 // instead of the section re-fetching it itself.
-const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
+import { BACKEND_URL } from "@/src/app/lib/backendUrl";
 
 export interface BackendTestimonial {
   id: number;

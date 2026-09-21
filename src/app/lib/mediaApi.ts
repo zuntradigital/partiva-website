@@ -3,7 +3,7 @@
 // URL is never exposed to client-side code. Mirrors pagesApi.ts.
 import { resolveMediaSrc } from "@/src/app/lib/mediaUrl";
 
-const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
+import { BACKEND_URL } from "@/src/app/lib/backendUrl";
 
 export interface MediaUsage {
   route: string | null;

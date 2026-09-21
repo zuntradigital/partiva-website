@@ -4,7 +4,7 @@
 // instead of each pricing view re-fetching it itself.
 import type { Plan } from "@/src/components/PricingSection/PricingCards";
 
-const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
+import { BACKEND_URL } from "@/src/app/lib/backendUrl";
 
 export interface CommissionTier {
   min: number;

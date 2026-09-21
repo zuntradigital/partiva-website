@@ -271,7 +271,9 @@ export default function ContactContent() {
       setStatus("success");
     } catch (err) {
       setStatus("failure");
-      setServerError(err instanceof Error ? err.message : copy.submitFailureRetry);
+      // A thrown TypeError is the browser's raw network failure ("Failed to fetch") -- show the
+      // localized retry text; a server-provided message (our own thrown Error) is shown as is.
+      setServerError(err instanceof Error && !(err instanceof TypeError) ? err.message : copy.submitFailureRetry);
       // The consumed/failed token can't be reused -- force a fresh widget.
       setRecaptchaToken(null);
       setRecaptchaResetKey((k) => k + 1);

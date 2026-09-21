@@ -10,6 +10,8 @@ import LiveContentSync from "../components/LiveContentSync/LiveContentSync";
 import { fetchContactInfo } from "./lib/contactApi";
 import { fetchPages } from "./lib/pagesApi";
 import { fetchMedia, resolveMedia } from "./lib/mediaApi";
+import { getRecaptchaSiteKey } from "./lib/recaptchaKey";
+import { RecaptchaConfigProvider } from "../components/Recaptcha/RecaptchaConfig";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -107,10 +109,12 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <ThemeProvider initialTheme={theme}>
           <LanguageProvider initialLocale={locale}>
+            <RecaptchaConfigProvider siteKey={getRecaptchaSiteKey()}>
             <LiveContentSync />
             <Navbar visibleNavSlugs={visibleNavSlugs} logo={navbarLogo ? { src: navbarLogo.url, altAr: navbarLogo.altAr, altEn: navbarLogo.altEn } : null} />
             {children}
             <Footer contact={contact} visibleNavSlugs={visibleNavSlugs} logo={footerLogo ? { src: footerLogo.url, altAr: footerLogo.altAr, altEn: footerLogo.altEn } : null} />
+            </RecaptchaConfigProvider>
           </LanguageProvider>
         </ThemeProvider>
 

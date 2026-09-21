@@ -1,7 +1,7 @@
 // Fetches pages/sections from the admin backend's public API. Called from
 // Server Components, so this is not subject to CORS and the backend URL is
 // never exposed to client-side code.
-const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
+import { BACKEND_URL } from "@/src/app/lib/backendUrl";
 
 export interface PageSection {
   id: number;

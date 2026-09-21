@@ -4,7 +4,7 @@
 import type { Article } from "@/src/app/types/article";
 import { resolveMediaSrc } from "@/src/app/lib/mediaUrl";
 
-const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
+import { BACKEND_URL } from "@/src/app/lib/backendUrl";
 
 function resolveArticleCover(article: Article): Article {
   if (!article.cover?.src) return article;

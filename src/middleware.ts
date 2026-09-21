@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
+import { BACKEND_URL } from "@/src/app/lib/backendUrl";
 
 // Mirrors the routes seeded into the `pages` table (see backend migration
 // 019_create_pages.sql) -- only these managed routes are gated by the
