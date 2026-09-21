@@ -17,7 +17,6 @@ import { useLanguage } from "@/src/components/LanguageProvider/LanguageProvider"
 import { EMAIL_PATTERN, PHONE_PATTERN, inputClass, phoneErrorMessage } from "@/src/app/lib/formValidation";
 import GenericSection from "@/src/components/GenericSection/GenericSection";
 import RevealOnScroll from "@/src/components/RevealOnScroll/RevealOnScroll";
-import Recaptcha from "@/src/components/Recaptcha/Recaptcha";
 import { resolveMainAndExtras, type PageSection } from "@/src/app/lib/pagesApi";
 
 type ContactInfo = { whatsappNumber: string; whatsappLink: string; websiteUrl: string; locationAr: string; locationEn: string };
@@ -126,8 +125,6 @@ export default function ContactContent() {
         inquiryTypeLabel: "نوع الاستفسار",
         inquiryTypePlaceholder: "اختر نوع الاستفسار",
         messageLabel: "الرسالة",
-        verifyLabel: "التحقق الأمني",
-        verifyRequired: "يرجى إكمال التحقق من أنك لست روبوتًا",
         sending: "جارِ الإرسال...",
         send: "إرسال الرسالة",
       }
@@ -154,8 +151,6 @@ export default function ContactContent() {
         inquiryTypeLabel: "Inquiry type",
         inquiryTypePlaceholder: "Choose inquiry type",
         messageLabel: "Message",
-        verifyLabel: "Security verification",
-        verifyRequired: "Please complete the verification below",
         sending: "Sending...",
         send: "Send message",
       };
@@ -196,14 +191,6 @@ export default function ContactContent() {
   const [serverError, setServerError] = useState("");
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
 
-  // "Are you a robot?" verification (Recaptcha.tsx) -- a real, server-checked
-  // control (see contact-messages.routes.ts), not a decorative checkbox.
-  // recaptchaResetKey is bumped after every failed attempt to force the
-  // widget to remount with a fresh token, since a token can only be used once.
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const [recaptchaError, setRecaptchaError] = useState("");
-  const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
-
   useEffect(() => {
     if (status === "success") {
       successHeadingRef.current?.focus();
@@ -243,24 +230,16 @@ export default function ContactContent() {
     const hasErrors = Object.values(nextErrors).some(Boolean);
     if (hasErrors) return;
 
-    if (!recaptchaToken) {
-      setRecaptchaError(copy.verifyRequired);
-      return;
-    }
-    setRecaptchaError("");
-
     setStatus("submitting");
     try {
       // Backed by contact_messages (partiva-admin-backend) -- distinct from
       // GET /api/contact above, which reads the site-wide contact-info
       // settings singleton, not individual message submissions. Shown in
-      // the Dashboard under "Contact Requests". recaptchaToken is verified
-      // server-side against Google's siteverify API before anything is
-      // written to the database -- this client-side check is UX only.
+      // the Dashboard under "Contact Requests".
       const res = await fetch(`${API}/api/contact-messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, recaptchaToken }),
+        body: JSON.stringify(values),
       });
 
       if (!res.ok) {
@@ -274,9 +253,6 @@ export default function ContactContent() {
       // A thrown TypeError is the browser's raw network failure ("Failed to fetch") -- show the
       // localized retry text; a server-provided message (our own thrown Error) is shown as is.
       setServerError(err instanceof Error && !(err instanceof TypeError) ? err.message : copy.submitFailureRetry);
-      // The consumed/failed token can't be reused -- force a fresh widget.
-      setRecaptchaToken(null);
-      setRecaptchaResetKey((k) => k + 1);
     }
   }
 
@@ -286,9 +262,6 @@ export default function ContactContent() {
     setTouched({});
     setServerError("");
     setStatus("idle");
-    setRecaptchaToken(null);
-    setRecaptchaError("");
-    setRecaptchaResetKey((k) => k + 1);
   }
 
   if (status === "success") {
@@ -532,24 +505,6 @@ export default function ContactContent() {
                 />
               </Field>
 
-              <div>
-                <span className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">{copy.verifyLabel}</span>
-                <Recaptcha
-                  key={`${locale}-${recaptchaResetKey}`}
-                  locale={locale}
-                  onVerify={(token) => {
-                    setRecaptchaToken(token);
-                    setRecaptchaError("");
-                  }}
-                  onExpire={() => setRecaptchaToken(null)}
-                />
-                {recaptchaError && (
-                  <p role="alert" aria-live="assertive" className="mt-1.5 text-sm text-red-600 dark:text-red-400">
-                    {recaptchaError}
-                  </p>
-                )}
-              </div>
-
               {status === "failure" && serverError && (
                 <p role="alert" aria-live="assertive" className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600 dark:bg-red-500/10 dark:text-red-400">
                   {serverError}
@@ -558,7 +513,7 @@ export default function ContactContent() {
 
               <button
                 type="submit"
-                disabled={!isFormValid || status === "submitting" || !recaptchaToken}
+                disabled={!isFormValid || status === "submitting"}
                 className="btn-motion flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-neutral-300 dark:disabled:bg-neutral-700 dark:focus-visible:ring-offset-neutral-900"
               >
                 {status === "submitting" && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}

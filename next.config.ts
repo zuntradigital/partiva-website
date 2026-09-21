@@ -13,19 +13,13 @@ const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BAC
 // files served from the backend's own origin (partiva-admin-backend's
 // /uploads route), not a same-site path or a self-contained data: URL, so
 // both the CSP and next/image's remote-image allowlist below must permit it.
-// The "Are you a robot?" widget (Recaptcha.tsx, Contact/Register forms) loads
-// Google's own reCAPTCHA script and renders its checkbox inside a Google-hosted
-// iframe -- both are blocked by default under the strict CSP below unless
-// explicitly allowlisted here (script-src for the script tag, frame-src for
-// the iframe itself; connect-src covers the script's own calls back to Google).
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com${isDev ? " 'unsafe-eval'" : ""};
+  script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: ${backendApiUrl};
   font-src 'self';
-  connect-src 'self' ${backendApiUrl} https://www.google.com;
-  frame-src https://www.google.com;
+  connect-src 'self' ${backendApiUrl};
   object-src 'none';
   base-uri 'self';
   form-action 'self';

@@ -71,6 +71,3 @@ npm start
 
 - Requires `BACKEND_API_URL` / `NEXT_PUBLIC_BACKEND_API_URL` to point at the deployed backend.
 - Standard Next.js production deployment (`next build` + `next start`, or a platform like Vercel).
-
-### reCAPTCHA (production)
-The Contact and Register forms use reCAPTCHA v2 (checkbox). Set `RECAPTCHA_SITE_KEY` (runtime) on the website host and the matching `RECAPTCHA_SECRET_KEY` on the backend; both must come from the same key pair, registered for the production domain(s). Google's public test key is refused on any non-local host (the form shows an "unavailable" notice instead of a test widget), and the backend refuses Google's test secret on a real deployment.
