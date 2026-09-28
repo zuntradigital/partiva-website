@@ -70,4 +70,5 @@ npm start
 ## Deployment Notes
 
 - Requires `BACKEND_API_URL` / `NEXT_PUBLIC_BACKEND_API_URL` to point at the deployed backend.
+- Requires `NEXT_PUBLIC_PLATFORM_API_URL` set to the **public HTTPS origin of the Partiva Platform API** (a different service from the admin backend above) **at build time** — the Join Us forms post to `<that origin>/api/v1/join-requests`. `NEXT_PUBLIC_*` values are baked into the build, so changing it needs a rebuild. Without it a production build has no Platform API to submit to (it warns at build time), and that API's `CORS_ORIGIN` must include this site's public origin(s), e.g. `https://partiva.tech,https://www.partiva.tech`.
 - Standard Next.js production deployment (`next build` + `next start`, or a platform like Vercel).

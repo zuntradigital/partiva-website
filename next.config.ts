@@ -12,7 +12,14 @@ const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BAC
 // The "Join Us as a Workshop / Client" forms POST directly to the Partiva
 // Platform's own backend (a different service/origin from backendApiUrl
 // above), so connect-src must allow it too.
-const platformApiUrl = process.env.NEXT_PUBLIC_PLATFORM_API_URL || "http://localhost:4000";
+// localhost only as the development default -- see JoinFormContent.tsx.
+const platformApiUrl = process.env.NEXT_PUBLIC_PLATFORM_API_URL || (isDev ? "http://localhost:4000" : "");
+if (!isDev && !process.env.NEXT_PUBLIC_PLATFORM_API_URL) {
+  console.warn(
+    "\n[partiva-website] NEXT_PUBLIC_PLATFORM_API_URL is not set: the Join Us forms in this build have no Platform API " +
+      "to submit to and will show an error. Set it to the Platform API's public origin (e.g. https://api.example.com) and rebuild.\n",
+  );
+}
 // Article cover images uploaded via the Dashboard's Media Library are real
 // files served from the backend's own origin (partiva-admin-backend's
 // /uploads route), not a same-site path or a self-contained data: URL, so

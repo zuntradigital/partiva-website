@@ -16,7 +16,12 @@ import { useLanguage } from "@/src/components/LanguageProvider/LanguageProvider"
 import { EMAIL_PATTERN, PHONE_PATTERN, inputClass, phoneErrorMessage } from "@/src/app/lib/formValidation";
 import RevealOnScroll from "@/src/components/RevealOnScroll/RevealOnScroll";
 
-const PLATFORM_API = process.env.NEXT_PUBLIC_PLATFORM_API_URL || "http://localhost:4000";
+// Inlined at BUILD time. The localhost default is for local development only: a production build without
+// NEXT_PUBLIC_PLATFORM_API_URL must not send visitors' browsers to "their own" localhost (which always fails, and on
+// an HTTPS page is upgraded to https://localhost) -- it has no Platform API to submit to.
+const PLATFORM_API = (
+  process.env.NEXT_PUBLIC_PLATFORM_API_URL || (process.env.NODE_ENV === "production" ? "" : "http://localhost:4000")
+).replace(/\/+$/, "");
 
 export type JoinKind = "WORKSHOP" | "CLIENT";
 
@@ -151,9 +156,17 @@ export default function JoinFormContent({ kind }: { kind: JoinKind }) {
     const hasErrors = Object.values(nextErrors).some(Boolean);
     if (hasErrors) return;
 
+    if (!PLATFORM_API) {
+      console.error("[Join Us] NEXT_PUBLIC_PLATFORM_API_URL was not set when this site was built, so there is no Platform API to submit to.");
+      setStatus("failure");
+      setServerError(copy.submitFailure);
+      return;
+    }
+
+    const endpoint = `${PLATFORM_API}/api/v1/join-requests`;
     setStatus("submitting");
     try {
-      const res = await fetch(`${PLATFORM_API}/api/v1/join-requests`, {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -169,11 +182,15 @@ export default function JoinFormContent({ kind }: { kind: JoinKind }) {
 
       if (!res.ok) {
         const data = await res.json().catch(() => null);
+        console.error(`[Join Us] POST ${endpoint} was rejected with HTTP ${res.status}`, data);
         throw new Error(data?.message || copy.submitFailure);
       }
 
       setStatus("success");
     } catch (err) {
+      // A TypeError from fetch means no response was received at all: the Platform API is unreachable, or the
+      // browser blocked the call (CORS: this site's origin missing from the API's CORS_ORIGIN, or mixed content).
+      if (err instanceof TypeError) console.error(`[Join Us] Could not reach the Platform API at ${endpoint}`, err);
       setStatus("failure");
       setServerError(err instanceof Error && !(err instanceof TypeError) ? err.message : copy.submitFailureRetry);
     }
