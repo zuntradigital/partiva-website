@@ -19,9 +19,13 @@ import RevealOnScroll from "@/src/components/RevealOnScroll/RevealOnScroll";
 // Inlined at BUILD time. The localhost default is for local development only: a production build without
 // NEXT_PUBLIC_PLATFORM_API_URL must not send visitors' browsers to "their own" localhost (which always fails, and on
 // an HTTPS page is upgraded to https://localhost) -- it has no Platform API to submit to.
+// Accepts the origin with or without a trailing "/api/v1" (the Platform frontend's own NEXT_PUBLIC_API_URL is written
+// with it), so the endpoint below never becomes .../api/v1/api/v1/join-requests.
 const PLATFORM_API = (
   process.env.NEXT_PUBLIC_PLATFORM_API_URL || (process.env.NODE_ENV === "production" ? "" : "http://localhost:4000")
-).replace(/\/+$/, "");
+)
+  .replace(/\/+$/, "")
+  .replace(/\/api\/v1$/, "");
 
 export type JoinKind = "WORKSHOP" | "CLIENT";
 

@@ -13,7 +13,9 @@ const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BAC
 // Platform's own backend (a different service/origin from backendApiUrl
 // above), so connect-src must allow it too.
 // localhost only as the development default -- see JoinFormContent.tsx.
-const platformApiUrl = process.env.NEXT_PUBLIC_PLATFORM_API_URL || (isDev ? "http://localhost:4000" : "");
+// Origin only: a connect-src entry with a path (e.g. ".../api/v1") would not match ".../api/v1/join-requests".
+const platformApiRaw = process.env.NEXT_PUBLIC_PLATFORM_API_URL || (isDev ? "http://localhost:4000" : "");
+const platformApiUrl = platformApiRaw ? new URL(platformApiRaw).origin : "";
 if (!isDev && !process.env.NEXT_PUBLIC_PLATFORM_API_URL) {
   console.warn(
     "\n[partiva-website] NEXT_PUBLIC_PLATFORM_API_URL is not set: the Join Us forms in this build have no Platform API " +
