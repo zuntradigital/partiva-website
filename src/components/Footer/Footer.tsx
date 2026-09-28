@@ -50,6 +50,18 @@ const linkColumns = [
   },
 ];
 
+// Not a Dashboard-managed page like linkColumns above -- these two routes
+// always exist (WorkshopJoinContent/ClientJoinContent), so this column is
+// never filtered through visibleNavSlugs and never disappears.
+const joinUsColumn = {
+  titleAr: "انضم إلينا",
+  titleEn: "Join Us",
+  links: [
+    { labelAr: "انضم كصاحب ورشة", labelEn: "Join as a Workshop Owner", href: "/join-us/workshop" },
+    { labelAr: "انضم كعميل", labelEn: "Join Us as a Client", href: "/join-us/client" },
+  ],
+};
+
 // Icon per platform name (as stored in the Dashboard's social links list) --
 // unrecognized platform names fall back to a generic link icon so a new
 // entry never disappears from the Footer.
@@ -157,7 +169,7 @@ export default function Footer({
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-1 gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-6">
             {/* Contact */}
             <m.div
               className="sm:col-span-1"
@@ -239,6 +251,26 @@ export default function Footer({
                 </ul>
               </m.div>
             ))}
+
+            {/* Join Us */}
+            <m.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.18 + visibleColumns.length * 0.09, duration: 0.45 }}
+            >
+              <h4 className="mb-4 font-bold text-white">{isArabic ? joinUsColumn.titleAr : joinUsColumn.titleEn}</h4>
+
+              <ul className="space-y-3 text-sm text-gray-400">
+                {joinUsColumn.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="transition-colors hover:text-white">
+                      {isArabic ? link.labelAr : link.labelEn}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </m.div>
 
             {/* Brand */}
             <m.div

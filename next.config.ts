@@ -9,6 +9,10 @@ const isDev = process.env.NODE_ENV === "development";
 // API (they're client components driven by the language/locale context, so a
 // server component fetch isn't an option), so connect-src must allow it.
 const backendApiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || "http://localhost:5000";
+// The "Join Us as a Workshop / Client" forms POST directly to the Partiva
+// Platform's own backend (a different service/origin from backendApiUrl
+// above), so connect-src must allow it too.
+const platformApiUrl = process.env.NEXT_PUBLIC_PLATFORM_API_URL || "http://localhost:4000";
 // Article cover images uploaded via the Dashboard's Media Library are real
 // files served from the backend's own origin (partiva-admin-backend's
 // /uploads route), not a same-site path or a self-contained data: URL, so
@@ -19,7 +23,7 @@ const cspHeader = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: ${backendApiUrl};
   font-src 'self';
-  connect-src 'self' ${backendApiUrl};
+  connect-src 'self' ${backendApiUrl} ${platformApiUrl};
   object-src 'none';
   base-uri 'self';
   form-action 'self';
